@@ -12,12 +12,12 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 142,
-  "scans": 81,
+  "total": 143,
+  "scans": 82,
   "leads": 61,
   "verified": 61,
   "approved": 0,
-  "no_leads": 20
+  "no_leads": 21
  },
  "skip_reasons": {
   "missing_data:liq_usd": 27,
@@ -31,6 +31,14 @@
   "non_json_answer": 1
  },
  "recent_tasks": [
+  {
+   "time": "2026-11-02T00:45:27",
+   "agent": "SCAN",
+   "action": "scan",
+   "mint": "-",
+   "result": "no_leads",
+   "reason": "all_39_already_judged"
+  },
   {
    "time": "2026-11-02T00:42:51",
    "agent": "SCAN",
@@ -142,16 +150,8 @@
    "mint": "-",
    "result": "no_leads",
    "reason": "all_33_already_judged"
-  },
-  {
-   "time": "2026-11-02T00:23:51",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
   }
  ],
- "last_task_at": "2026-11-02T00:42:51",
- "generated_at": "2026-11-02 00:42:51 PST"
+ "last_task_at": "2026-11-02T00:45:27",
+ "generated_at": "2026-11-02 00:45:27 PST"
 }
