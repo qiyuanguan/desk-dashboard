@@ -1,4 +1,4 @@
-import { CONFIG, REASONS, ENTRY_PARTS, REASON_RULES, REASON_UNKNOWN } from './config.js';
+import { CONFIG, REASONS, ENTRY_PARTS, REASON_RULES, REASON_UNKNOWN } from './config.js?v=20261102-v5';
 
 export const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const fin = v => v != null && v !== '' && isFinite(v);            // null / '' / NaN / 字符串乱码 都算没有

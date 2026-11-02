@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20261102-v5">
 <title>纸上交易台 · 策略看板</title>
 </head>
 <body>
@@ -40,6 +40,7 @@
   <a href="#sec-strategies" class="on">策略对比</a>
   <a href="#sec-kline">K 线</a>
   <a href="#sec-records">成交与跳过</a>
+  <a href="#sec-scans">扫描记录</a>
 </nav>
 
 <main class="layout">
@@ -52,11 +53,20 @@
     <div class="strat-cards" id="strat-cards"></div>
     <div class="sub-head">
       <h3>权益曲线</h3>
-      <div class="seg" id="curve-range">
-        <button data-r="1">1 天</button><button data-r="3">3 天</button><button data-r="7" class="on">7 天</button><button data-r="0">全部</button>
+      <div class="curve-tools">
+        <div class="seg" id="curve-mode" title="金额：纵轴是美元权益；收益率：每个策略按自己的起始资金换算成 %，起始资金不同也能放在一起比">
+          <button data-m="usd">金额</button><button data-m="pct">收益率</button>
+        </div>
+        <div class="seg" id="curve-aux" hidden title="对照组 / 未分类的曲线是否画进图里。纵轴始终按正式策略缩放">
+          <button data-a="1">显示对照/未分类</button><button data-a="0">只看正式</button>
+        </div>
+        <div class="seg" id="curve-range">
+          <button data-r="1">1 天</button><button data-r="3">3 天</button><button data-r="7" class="on">7 天</button><button data-r="0">全部</button>
+        </div>
       </div>
     </div>
     <div class="legend-row" id="curve-legend"></div>
+    <div class="curve-note" id="curve-note"></div>
     <div class="chart" id="equity-chart"></div>
     <h3 class="sub-title">排行</h3>
     <div class="table-wrap">
@@ -73,7 +83,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="small muted note">成交笔数：一买一卖算一笔（开仓到完全平仓；分批卖出仍算同一笔），仍在持仓的不算。胜率 = 净盈亏 &gt; 0 的笔数 ÷ 成交笔数。买/卖次数只作参考。</p>
+    <p class="small muted note">成交笔数：一买一卖算一笔（开仓到完全平仓；分批卖出仍算同一笔），仍在持仓的不算。胜率 = 胜 ÷（胜 + 负）：净盈亏 &gt; 0 算胜、&lt; 0 算负，= 0 算持平，持平不计入分母、单独列出；还没有胜负时显示「—」。买/卖次数只作参考。</p>
     <details class="strat-desc" id="strat-desc"><summary>策略说明（摘自 01-策略设计-交付.md）</summary><div id="strat-desc-body"></div></details>
   </section>
 
@@ -92,7 +102,7 @@
       </label>
       <div class="ohlc mono" id="ohlc"></div>
     </div>
-    <div class="kwrap"><div class="chart chart-kline" id="kline-chart"></div><div class="kstate" id="kline-state" hidden></div></div>
+    <div class="kwrap"><div class="chart chart-kline" id="kline-chart"></div><div class="ktip" id="kline-tip" hidden></div><div class="kstate" id="kline-state" hidden></div></div>
     <div class="muted small kline-foot" id="kline-foot"></div>
   </section>
 
@@ -106,11 +116,10 @@
   <section id="sec-records" class="card">
     <div class="card-head">
       <div class="seg seg-lg" id="rec-tabs">
-        <button data-t="trades" class="on">成交记录</button><button data-t="skips">跳过记录</button><button data-t="events" title="扫描汇总、全局限额等不属于某个币的记录；不计入成交和跳过的笔数">扫描汇总</button>
+        <button data-t="trades" class="on">成交记录</button><button data-t="skips">跳过记录</button>
       </div>
       <div class="muted small" id="rec-count"></div>
     </div>
-    <div class="scan-line small" id="scan-line" hidden></div>
     <div class="filters">
       <select id="f-strategy"><option value="">全部策略</option></select>
       <select id="f-token"><option value="">全部币</option></select>
@@ -122,11 +131,20 @@
     </div>
     <div class="pager" id="pager"></div>
   </section>
+
+  <!-- 扫描记录（v0.5 顶层 events + 混在 skips/trades 里的汇总行、全局行）：只作参考，不计入任何统计 -->
+  <section id="sec-scans" class="card span-2">
+    <div class="card-head"><h2>扫描记录</h2><div class="muted small" id="scan-count"></div></div>
+    <div class="scan-line small" id="scan-line" hidden></div>
+    <div class="table-wrap"><table class="tbl tbl-scans" id="scan-table"><thead><tr><th>时间</th><th>类型</th><th>内容</th></tr></thead><tbody></tbody></table></div>
+    <div class="pager"><button id="scan-more" hidden>显示全部</button></div>
+    <p class="muted small scan-note">后端每轮扫描的汇总和不属于某个币的全局记录，只作参考，不计入成交、跳过和策略统计。</p>
+  </section>
 </main>
 
 <footer class="muted small">每 60 秒自动刷新 · 时间为<span id="footer-tz">美西时间</span> · 点击成交记录可在 K 线上定位</footer>
 
-<script src="vendor/lightweight-charts.standalone.production.js"></script>
-<script type="module" src="js/app.js"></script>
+<script src="vendor/lightweight-charts.standalone.production.js?v=20261102-v5"></script>
+<script type="module" src="js/app.js?v=20261102-v5"></script>
 </body>
 </html>

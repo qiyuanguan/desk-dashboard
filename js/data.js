@@ -20,7 +20,7 @@
 //   sample, sampleNote, paper(true|false|null), schemaVersion, generatedAt, generatedTs, base(data.json 的绝对地址), klinePath, klineIndex,
 //   strategies: [{ id, name, short, tag, desc, color, dashed, start, cash, equity, pnl, pnl_pct, realized_pnl, unrealized_pnl,
 //                  closed_count,            // 成交笔数（主数字）：一买一卖算一笔 = 已完全平仓的仓位数
-//                  wins, losses, win_rate,  // 都按 closed_count 口径：一笔净盈亏 > 0 算胜；win_rate = wins / closed_count
+//                  wins, losses, breakeven (旧名 flats，页面内部仍叫 flats), win_rate,  // 一笔净盈亏 >0 胜、<0 负、=0 持平；v4：win_rate = wins ÷ (wins + losses)，持平不进分母；没有胜负时 null（显示「—」）
 //                  buy_count, sell_count,   // 次要信息：买入/卖出次数（分批止盈时一笔会有多次卖出）
 //                  max_drawdown_pct, equity_curve: [{time, value, backfilled}],
 //                  positions: [{ position_id, mint, symbol, qty, entry_price, last_price, cost_usd, value_usd, pnl_pct, opened_at,
@@ -29,11 +29,11 @@
 //   trades: [{ id, time, strategy, position_id, action:'buy'|'sell', mint, symbol, market_price, fill_price, price(=fill), cost_pct_per_side, agent, qty, usd, pnl|null, pnl_pct|null, reason }],
 //   skips:  [{ time, strategy, mint, symbol, stage, reason }],              // 只含“某个币被跳过”的行
 //   events: [{ time, kind:'summary'|'global', strategy, stage, result, reason, summary:{data,truncated}|null }],  // 汇总行/全局行，不计入统计
-//   strategies[].role: 'formal' | 'control'（对照组 S0，见上面 CONTROL）
+//   strategies[].role: 'formal' | 'control' | 'other'（正式 / 对照组 S0 / 未分类，见下面 roleOf）；roleRaw = 数据里的原值
 // }
 // 所有 time 都是 Unix 秒（UTC），界面显示为美西时间（PST/PDT 自动）。
-import { CONFIG, STRATEGY_META } from './config.js';
-import { safeColor, num, parseIso } from './fmt.js';
+import { CONFIG, STRATEGY_META } from './config.js?v=20261102-v5';
+import { safeColor, num, parseIso } from './fmt.js?v=20261102-v5';
 
 // ┌──────────────────────────────────────────────────────────────────────────────────────────────
 // │ 对照组 S0 的识别（2026-11-02 Bill 批准新增；code/数据格式.md 还没写 S0 的正式格式，定稿后只改这一块）
@@ -52,8 +52,16 @@ export const CONTROL = {
   CANON_ID: 'S0',              // 用 agent 认出来的行归到这个 id
   START_USD: 50,               // 只用于说明文字；真实值以 data.json 的 start 为准
 };
-export const isControl = s => !!s && (s.role === 'control' || s.group === 'control' || s.control === true ||
-  CONTROL.IDS.includes(String(s.id ?? '')) || CONTROL.ID_RE.test(String(s.id ?? '')));
+// v0.5 role 口径（程序员 2026-11-02 01:39 确认）：直接用数据里的 role ——
+//   "main"    → 'formal'  正式策略，只有它计入合计、参与排名（以后 S1–S3 也会标 main）
+//   "control" → 'control' 对照组（S0），不计入合计
+//   "other"   → 'other'   未分类：导出认不出的策略（兜底值），单独列出、标“未分类”，不计入合计
+// 只有缺 role 的旧数据（v0.4 及以前）才按旧规则推断（id / group / control → 对照组，其余正式）。
+// role 写了但不是这三个值 → 当未分类（不让来路不明的策略混进合计）。
+const legacyControl = s => s.group === 'control' || s.control === true || CONTROL.IDS.includes(String(s.id ?? '')) || CONTROL.ID_RE.test(String(s.id ?? ''));
+export const roleOf = s => !s ? 'formal' : s.role === 'main' ? 'formal' : s.role === 'control' ? 'control' : s.role === 'other' ? 'other'
+  : s.role == null || s.role === '' ? (legacyControl(s) ? 'control' : 'formal') : 'other';
+export const isControl = s => !!s && roleOf(s) === 'control';
 const rowStrategy = x => str(x.strategy) || (str(x.agent).trim() === CONTROL.AGENT ? CONTROL.CANON_ID : '');
 
 // ┌ 汇总行 / 全局行（热修 02a，BUG-H06 / HF-GEN-08）：tasks.csv 里不属于某个币的行
@@ -133,21 +141,54 @@ function countTrades(trades, openKeys) {
   }
   const lastOf = new Map(rounds.map(r => [r.key, r]));     // 每个 key 的最后一轮
   const closed = rounds.filter(r => r.sold && !(openKeys.has(r.key) && lastOf.get(r.key) === r));
-  const wins = closed.filter(p => p.pnl > 0).length;
-  return { closed_count: closed.length, wins, losses: closed.length - wins,
-    win_rate: closed.length ? +(wins / closed.length * 100).toFixed(1) : null, buy_count: buys, sell_count: sells };
+  // V2-06：净盈亏 > 0 胜，< 0 负，= 0 持平（持平不算负）。v4：胜率 = 胜 ÷（胜 + 负），持平不计入分母
+  const wins = closed.filter(p => outcome(p.pnl) === 'win').length, losses = closed.filter(p => outcome(p.pnl) === 'loss').length;
+  return { closed_count: closed.length, wins, losses, flats: closed.length - wins - losses,
+    win_rate: winRate(wins, losses), buy_count: buys, sell_count: sells };
 }
+// v4 胜率口径（软件负责人 11-02 定）：胜 ÷（胜 + 负），持平不进分母；没有胜负（全是持平或还没平仓）时为 null，页面显示「—」
+export const winRate = (w, l) => Number.isFinite(w) && Number.isFinite(l) && w + l > 0 ? +(w / (w + l) * 100).toFixed(1) : null;
+// 一笔（或一个仓位）净盈亏的归类；|pnl| < 1e-9 视为 0（浮点噪声）
+export const FLAT_EPS = 1e-9;
+export const outcome = pnl => !Number.isFinite(pnl) ? null : pnl > FLAT_EPS ? 'win' : pnl < -FLAT_EPS ? 'loss' : 'flat';
 const COUNT_KEYS = ['closed_count', 'wins', 'losses', 'buy_count', 'sell_count'];
 const NUM_KEYS = ['start', 'cash', 'equity', 'pnl', 'pnl_pct', 'realized_pnl', 'unrealized_pnl', 'win_rate', 'max_drawdown_pct'];
 const str = v => v == null ? '' : typeof v === 'object' ? '' : String(v);
+
+// 胜 / 负 / 平 + v4 胜率（页面自己算，不用导出的 win_rate：导出现在是 wins ÷ closed_count 旧口径）
+function wlOf(s, derived) {
+  const closed = num(s.closed_count), lossesRaw = num(s.losses);
+  if (derived.closed_count === (closed ?? derived.closed_count)) {
+    const wins = num(s.wins) ?? derived.wins;
+    return { wins, losses: derived.losses, flats: derived.flats, lossesRaw, win_rate: winRate(wins, derived.losses), wrSrc: 'trades' };
+  }
+  // v5：导出的持平字段正式名是 breakeven；旧数据只有 flats 时兜底
+  const wins = num(s.wins), flats = num(s.breakeven) ?? num(s.flats);
+  let losses = lossesRaw;
+  if (flats != null && wins != null && closed != null && lossesRaw === closed - wins) losses = lossesRaw - flats;
+  return { wins, losses, flats, lossesRaw, win_rate: winRate(wins, losses), wrSrc: flats == null && losses ? 'export-maybe-flats' : 'export' };
+}
 
 export function normalize(raw, base = (typeof location !== 'undefined' ? new URL(PATHS.DATA, location.href).href : PATHS.DATA)) {
   raw = raw && typeof raw === 'object' ? raw : {};
   const arr = v => Array.isArray(v) ? v : [];
   // v0.4：成交带 market_price（不含成本，用来画买卖点）和 fill_price（含模拟成本）；旧数据只有 price → 两个都用它
   const events = [];
-  const toEvent = (x, from) => ({ time: toSec(x.time), kind: isSummaryRow(x) ? 'summary' : 'global', from, strategy: rowStrategy(x),
-    stage: str(x.stage || x.action), result: str(x.result), reason: str(x.reason), summary: isSummaryRow(x) ? parseSummary(x.reason) : null });
+  // 一条扫描记录 → 界面模型。先读 v0.5 的 x.type 和 x.data（data 已经是对象）：
+  //   data._parse_error === true → parseError，界面标「内容无法解析」并显示转义后的 data._raw；否则 summary = data 本身。
+  // 没有 data 字段的老格式（tasks.csv 混进 trades/skips 的行，reason 里是 JSON 字符串）才用 parseSummary(x.reason) 兜底。
+  const toEvent = (x, from) => {
+    const type = str(x.type) || str(x.stage || x.action);
+    const data = x.data && typeof x.data === 'object' && !Array.isArray(x.data) ? x.data : null;
+    const isSum = /summary/.test(type) || isSummaryRow(x);
+    const base = { time: toSec(x.time), from, strategy: rowStrategy(x), stage: type, result: str(x.result), reason: str(x.reason) };
+    if (data) {
+      const parseError = data._parse_error === true;
+      return { ...base, kind: isSum || parseError ? 'summary' : 'global', parseError, raw: parseError ? str(data._raw) : '',
+        summary: parseError ? null : { data, truncated: false }, reason: base.reason || (parseError ? str(data._raw) : JSON.stringify(data)) };
+    }
+    return { ...base, kind: isSum ? 'summary' : 'global', parseError: false, raw: '', summary: isSum ? parseSummary(x.reason) : null };
+  };
   const trades = arr(raw.trades).filter(x => {
     // 只有 buy/sell 才是成交；汇总行等混进来的非买卖行挪到 events
     if (x && (x.action === 'buy' || x.action === 'sell')) return true;
@@ -165,7 +206,8 @@ export function normalize(raw, base = (typeof location !== 'undefined' ? new URL
     const meta = STRATEGY_META[id] || (isControl({ ...s, id }) ? STRATEGY_META.S0 : {}) || {};
     const positions = arr(s.positions).map(p => ({ ...p, strategy: id, mint: str(p.mint), symbol: str(p.symbol),
       opened_at: toSec(p.opened_at), entry_price: num(p.entry_price), last_price: num(p.last_price),
-      value_usd: num(p.value_usd), cost_usd: num(p.cost_usd), pnl_pct: num(p.pnl_pct), qty: num(p.qty), pool_missing: p.pool_missing === true }));
+      value_usd: num(p.value_usd), cost_usd: num(p.cost_usd), pnl_pct: num(p.pnl_pct), qty: num(p.qty), pool_missing: p.pool_missing === true,
+      price_source: str(p.price_source) || null }));   // v0.5：gt_close | last_trade
     const derived = countTrades(trades.filter(x => x.strategy === id),
       new Set(positions.map(p => p.position_id ?? `${p.mint}|${id}`)));
     const pick = k => { const v = num(s[k]); return v != null ? v : derived[k]; };
@@ -177,12 +219,16 @@ export function normalize(raw, base = (typeof location !== 'undefined' ? new URL
       .filter(p => p && p.time != null && p.value != null).sort((a, b) => a.time - b.time);
     const name = str(s.name).trim() || meta.name || id;   // 缺 name 用 id 兜底（BUG-011）
     return {
-      ...s, ...nums, id, name, role: isControl({ ...s, id }) ? 'control' : 'formal',
+      ...s, ...nums, id, name, role: roleOf({ ...s, id }), roleRaw: str(s.role) || null,
       short: str(s.short) || meta.short || name.replace(/（.*?）/g, '').slice(0, 3),
       tag: str(s.tag ?? meta.tag ?? ''), desc: str(s.desc ?? meta.desc ?? ''), dashed: s.dashed != null ? s.dashed === true : !!meta.dashed,
       // 颜色只认白名单格式，不合法的换成默认色（BUG-005）
       color: safeColor(s.color) || meta.color || CONFIG.STRATEGY_COLORS[i % CONFIG.STRATEGY_COLORS.length],
-      ...Object.fromEntries(COUNT_KEYS.map(k => [k, pick(k)])), win_rate: pick('win_rate'),
+      ...Object.fromEntries(COUNT_KEYS.map(k => [k, pick(k)])),
+      // V2-06：导出（export_klines.py）的 losses = closed_count − wins，把持平也算成了负（程序员会在 S0 小修复包里改）。
+      // 成交明细能对上已平仓笔数时，胜/负/平按明细重算；对不上（成交早于导出范围）时用导出值：
+      // 导出给了 flats 且 losses 是旧口径（= closed − wins）→ 负 = losses − flats；没给 flats → 持平记为未知（null），负场可能含持平
+      ...wlOf(s, derived),
       equity_curve: dedupe(curve),
       positions,
       cost_pct_per_side: num(s.cost_pct_per_side),
@@ -207,7 +253,21 @@ export function normalize(raw, base = (typeof location !== 'undefined' ? new URL
   }).map(x => ({ ...x, time: toSec(x.time), strategy: rowStrategy(x), mint: str(x.mint), symbol: str(x.symbol),
     stage: str(x.stage), reason: str(x.reason) })).filter(x => x.time != null).sort((a, b) => b.time - a.time);
   // 后端将来如果单独给 scan_summaries / events 数组，也收进来
-  for (const x of [...arr(raw.scan_summaries), ...arr(raw.events)]) if (x && typeof x === 'object') events.push(toEvent({ action: 'scan_summary', ...x }, 'events'));
+  // v0.5：顶层 events = 最近约 48 条 scan_summary 对象（time 是 UTC epoch 秒）。字段可能直接平铺（raw/queued/…），
+  // 也可能放在 summary/data 里，或者是 reason 里的 JSON 字符串 —— 三种都认；缺字段不报错
+  const META_KEYS = new Set(['time', 't', 'ts', 'type', 'kind', 'action', 'stage', 'result', 'reason', 'strategy', 'agent', 'mint', 'symbol', 'summary', 'data']);
+  for (const x of [...arr(raw.scan_summaries), ...arr(raw.events)]) {
+    if (!x || typeof x !== 'object') continue;
+    const type = str(x.type || x.kind || x.action || x.stage);
+    if (type && !/summary/.test(type) && str(x.mint).trim() && !NO_MINT(str(x.mint).trim())) continue;   // 未知的非汇总事件先忽略
+    // v0.5 正式写法 {time, type, agent, strategy, data:{…}} 直接交给 toEvent；早期草稿的 summary 对象 / 平铺字段转成 data 再交
+    const isObj = v => v && typeof v === 'object' && !Array.isArray(v);
+    const flat = Object.fromEntries(Object.entries(x).filter(([k, v]) => !META_KEYS.has(k) && (v == null || typeof v !== 'object')));
+    const data = isObj(x.data) ? x.data : isObj(x.summary) ? x.summary : Object.keys(flat).length ? flat : undefined;
+    const ev = toEvent({ type: 'scan_summary', ...x, data, time: x.time ?? x.t ?? x.ts }, 'events');
+    ev.kind = 'summary';
+    events.push(ev);
+  }
   const evs = events.filter(e => e.time != null).sort((a, b) => b.time - a.time);
   const gen = typeof raw.generated_at === 'string' || typeof raw.generated_at === 'number' ? raw.generated_at : '';
   return {

@@ -28,7 +28,7 @@ h1{font-size:18px;margin:0;letter-spacing:.5px}
 .updated .stale{color:var(--warn)}
 .icon-btn{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:3px 8px;font-size:12px;color:var(--mut);cursor:pointer}
 
-.tabs-main{position:sticky;top:0;z-index:20;display:flex;gap:4px;padding:6px 14px;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);
+.tabs-main{position:sticky;top:var(--bh,0px);z-index:20;display:flex;gap:4px;padding:6px 14px;background:rgba(11,15,20,.92);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);max-width:100%;overflow-x:auto}
 .tabs-main a{color:var(--mut);padding:5px 12px;border-radius:999px;font-size:13px;white-space:nowrap}
 .tabs-main a.on,.tabs-main a:hover{background:var(--card2);color:var(--fg)}
@@ -204,12 +204,19 @@ footer{text-align:center;padding:8px 12px 0}
 /* 权益曲线回补段图例（v0.4 backfilled） */
 .legend-row .bf-note{color:var(--mut)}
 .legend-row i.bf{background:none!important;border-top:2px dotted var(--mut);height:0!important;opacity:.8}
-/* 手机：可点区域 ≥40px（BUG-016） */
+/* 可点区域 ≥40px（BUG-016 / V2-01）：v4 起桌面和平板也一样，不再只限手机 */
+.seg button,.pager button,.icon-btn,.tok,.curve-tools button,#rec-tabs button,#scan-more{min-height:40px}
+.seg button{padding:6px 12px}
+.pager button{padding:6px 14px}
+.icon-btn{padding:6px 10px}
+.tabs-main a{display:inline-flex;align-items:center;min-height:40px;padding:0 12px}
+.strat-desc summary{display:flex;align-items:center;min-height:40px;padding:0}
+select,input[type=search]{min-height:40px}
+#rank-table th.sortable{height:40px}
+#rec-table tbody td{height:40px}
 @media (max-width:639px){
-  .seg button{min-height:40px;padding:6px 12px}
-  .pager button{min-height:40px;padding:6px 14px}
-  .icon-btn{min-height:40px;padding:6px 10px}
-  .tok{min-height:40px}
+  .tabs-main{padding:4px 10px}
+  select,input[type=search]{font-size:14px}
 }
 
 /* 对照组（S0）：单独一组，虚线边框 + “对照组”标签；不参与排名和合计 */
@@ -223,8 +230,42 @@ footer{text-align:center;padding:8px 12px 0}
 .leg-sep{color:var(--line2)}
 #rank-table tr.grp td{font-size:11px;color:var(--mut);background:var(--card2);border-top:1px dashed var(--line2);padding-top:6px;padding-bottom:6px}
 #rank-table tr.ctrl td{background:rgba(244,114,182,.03)}
+/* 未分类（role=other）：导出认不出的策略，单独成组、不计入合计 */
+.scard.unc{border-style:dotted;background:transparent}
+.tag.unc,.rank-tag.unc{display:inline-block;font-size:11px;line-height:16px;padding:0 5px;border-radius:4px;border:1px dotted #a3a3a3;color:#d4d4d4;background:rgba(163,163,163,.08);font-weight:500;margin-left:4px;white-space:nowrap}
+.tag.unc.sm{margin:0 4px 0 0}
+#rank-table tr.unc td{background:rgba(163,163,163,.03)}
 .scan-line{background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:0 0 8px;color:var(--mut);line-height:1.6}
 .scan-line b{color:var(--fg);font-weight:600}
 
 /* 上线横幅：常驻顶部、不能关闭 */
-.preview-banner{background:#7c2d12;color:#fff;text-align:center;font-weight:700;font-size:14px;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid #f97316}
+.preview-banner{position:sticky;top:0;z-index:30;background:#7c2d12;color:#fff;text-align:center;font-weight:700;font-size:14px;letter-spacing:.5px;padding:8px 10px;border-bottom:2px solid #f97316}
+/* SMK-01：paper≠true 时横幅和下面的警示一致 */
+.preview-banner.danger{background:#7f1d1d;border-bottom-color:#ef4444}
+.preview-banner.warn{background:#713f12;border-bottom-color:#f59e0b}
+@media (max-width:600px){.preview-banner{font-size:13px;padding:6px 8px}}
+/* 锚点跳转不被吸顶的横幅+导航挡住 */
+section[id^="sec-"]{scroll-margin-top:calc(var(--bh,0px) + 58px)}
+.scan-note{margin:8px 0 0}
+.tbl-scans td.c-reason{white-space:normal;line-height:1.5}
+.raw-text{word-break:break-all;color:var(--mut)}
+
+/* V2-04：权益曲线工具条（金额/收益率、对照组/未分类曲线开关） */
+.curve-tools{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.curve-note{color:var(--mut);font-size:12px;margin:2px 0 4px}
+/* V2-03：没有正式策略时的空状态 */
+.strat-empty{border:1px dashed var(--line2);border-radius:var(--radius);padding:12px;color:var(--mut);font-size:13px;grid-column:1/-1}
+/* V2-05：仅成交记录策略的计数说明 */
+.scard .ledger-note{font-size:11px;color:var(--mut);line-height:1.4;margin-top:4px}
+/* 买卖点提示框（K 线上悬停/点按） */
+.kline-wrap{position:relative}
+.ktip{position:absolute;z-index:5;pointer-events:none;max-width:280px;background:rgba(17,24,33,.96);border:1px solid var(--line2);border-radius:8px;padding:6px 8px;font-size:12px;line-height:1.5;box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.ktip .row+.row{border-top:1px solid var(--line);margin-top:4px;padding-top:4px}
+.ktip .quote-gap{display:inline-block;margin-top:2px}
+.tag.flat,.flat{color:var(--mut)}
+.sub-head{flex-wrap:wrap;gap:6px}
+
+/* v4：还没有胜负时胜率显示「—」，用弱化色，避免看成 0% */
+.wr-none{color:var(--mut);font-weight:400}
+/* v4：K 线下方的合约地址链接也算可点区域，≥40px */
+.kline-foot a{display:inline-flex;align-items:center;min-height:40px}

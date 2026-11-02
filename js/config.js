@@ -5,7 +5,9 @@ export const CONFIG = {
   REFRESH_MS: 60_000,
   TIMEZONE: 'America/Los_Angeles',
   TZ_LABEL: 'PST',          // 仅作兜底；实际按日期自动显示 PST / PDT（见 fmt.js tz()）
-  STALE_MIN: 10,            // data.json 的 generated_at 超过这么多分钟没更新 → 顶部标红“数据已过期”
+  // data.json 的 generated_at 超过这么多分钟没更新 → 顶部标红“数据已过期”。
+  // 导出建议每 5 分钟跑一次，默认 15 分钟（容忍漏 2 轮）；运维要更严可改成 10。上线说明见 RELEASE.md
+  STALE_MIN: 15,
   PAGE_SIZE: 20,
   INTERVALS: { '1m': 60, '5m': 300, '15m': 900, '1h': 3600 },
   DEFAULT_INTERVAL: '5m',
@@ -38,10 +40,10 @@ export const REASONS = {
   non_json_answer:'Grok 回答格式异常', bad_json_shape:'Grok 回答字段不对',
   // 下单 / 账本
   already_open:'已持仓', max_open:'持仓数已满', session_loss_halt:'会话熔断', cash_below_min_ticket:'现金不足最小单',
-  entry:'入场', exit:'离场', assumed_pass:'默认放行', ma_cross_up:'均线上穿', ma_cross_down:'均线下穿',
+  entry:'买入（入场）', manual:'手动登记', exit:'离场', assumed_pass:'默认放行', ma_cross_up:'均线上穿', ma_cross_down:'均线下穿',
   // 离场
-  hard_stop:'硬止损', trail:'移动止损', trailing_stop:'移动止损', time_stop:'时间止损', ladder:'阶梯止盈', liq_drop:'流动性骤降',
-  pool_gone:'池子没了', pool_missing:'价格源找不到池子（撤池观察）', liquidity_pulled:'流动性被抽走',
+  hard_stop:'硬止损（跌到止损线）', trail:'移动止损', trailing_stop:'移动止损（从峰值回落）', time_stop:'时间止损（持仓到时仍没涨）', ladder:'阶梯止盈', liq_drop:'流动性骤降',
+  pool_gone:'池子没了，按 0 清算', pool_missing:'价格源找不到池子（撤池观察）', liquidity_pulled:'流动性被撤',
   // S0 对照组（code/s0/，2026-11-02）
   s0_already_open:'S0 已持有这个币', s0_formal_holds:'正式策略已持有这个币', s0_max_open:'S0 持仓数已满', s0_cash_below_ticket:'S0 现金不够一笔 $5',
   s0_stop_loss:'S0 止损（−15%）', s0_max_hold:'S0 持有满 40 分钟强平',
@@ -64,7 +66,8 @@ export const DANGER_CN = {
 // 前缀/正则规则：[正则, 翻译函数]。fmt.reason() 依次尝试，命中第一个为止。
 export const REASON_RULES = [
   [/^pairs_empty_or_no_liquidity\s+(\d+)\/(\d+)$/, m => `价格源查不到池子或没流动性（连续第 ${m[1]}/${m[2]} 次）`],
-  [/^take_profit_(\d+)$/, m => `止盈 +${m[1]}%`],
+  // v0.4 文档 6b：take_profit_40 = 第 1 档，take_profit_100 = 第 2 档；N 跟着 config.EXIT ladder 变
+  [/^take_profit_(\d+)$/, m => ({ 40: '第 1 档止盈（+40%）', 100: '第 2 档止盈（+100%）' })[m[1]] || `止盈 +${m[1]}%`],
   [/^all_(\d+)_already_judged_or_not_due$/, m => `本轮 ${m[1]} 个线索都已判过或还没到重判时间`],
   [/^\s*[{\[]/, () => '扫描汇总（原始 JSON，后端已截断，详见日志）'],
   [/^x_read:\s*(.*)$/s, m => 'X 舆情不通过' + (m[1] ? '：' + m[1] : '')],
@@ -76,7 +79,6 @@ export const REASON_RULES = [
   [/^error:\s*(.*)$/s, m => '出错' + (m[1] ? '：' + m[1] : '')],
   [/^limits:\s*(.+)$/, (m, tr) => '限额：' + tr(m[1])],
   [/^all_(\d+)_already_judged$/, m => `${m[1]} 个线索都已判断过`],
-  [/^take_profit_(\d+(?:\.\d+)?)$/, m => `止盈 +${m[1]}%`],
   [/^pool_missing[:_]?\s*(.*)$/s, m => '价格源找不到池子（撤池观察）' + (m[1] ? '：' + m[1] : '')],
   [/^gt_(.+)$/, m => `GeckoTerminal 线索（${m[1]}）`],
   [/^dexscreener_(.+)$/, m => `DexScreener：${m[1]}`],
@@ -125,5 +127,8 @@ export const STAGES_EXTRA = { scan_summary: '扫描汇总', limits: '全局限�
 // scan_summary JSON 的字段（code/hotfix/desk/scan.py 末尾）
 export const SUMMARY_FIELDS = [['raw', '线索'], ['queued', '入队'], ['verified', '验证'], ['fills', '成交'], ['gt_ok', 'GT 通过'],
   ['watch', '观察名单'], ['watch_added', '新入名单'], ['graduated', '毕业'], ['recheck', '重判'], ['not_due', '未到重判'],
-  ['grok_calls', 'Grok 本轮'], ['grok_today', 'Grok 今天'], ['secs', '用时（秒）']];
+  ['grok_calls', 'Grok 本轮'], ['grok_today', 'Grok 今天'], ['secs', '用时（秒）'], ['dex_checked', 'Dex 查过']];
+// v0.5 events 的 queued 是按来源分的对象 {gt_trending_5m: 3, dexscreener_new: 22, …}
+export const QUEUE_SRC = { gt_trending_5m: 'GT 5 分钟热门', gt_trending_1h: 'GT 1 小时热门', gt_trending_6h: 'GT 6 小时热门',
+  gt_new_pools: 'GT 新池', dexscreener_new: 'Dex 新币', aged_liquid: '老币有流动性', graduated: '刚毕业', recheck: '重判' };
 export const TOKEN_STATUS = { position: '持仓', candidate: '候选', closed: '已平仓' };
