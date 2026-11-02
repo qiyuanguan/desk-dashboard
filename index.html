@@ -7,106 +7,126 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="纸上交易台">
-<meta name="theme-color" content="#0d1117">
-<meta http-equiv="Cache-Control" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0b0f14">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="manifest" href="manifest.json">
-<title>纸上交易台</title>
-<style>
-:root{--bg:#0d1117;--card:#161b22;--line:#30363d;--fg:#e6edf3;--mut:#8b949e;--up:#3fb950;--dn:#f85149;--warn:#d29922}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;
- padding:calc(env(safe-area-inset-top) + 8px) 12px calc(env(safe-area-inset-bottom) + 16px)}
-.banner{background:#1f2a1f;border:1px solid #2e4a2e;color:#7ee787;text-align:center;border-radius:10px;padding:8px;font-weight:600;font-size:14px}
-header{display:flex;justify-content:space-between;align-items:baseline;margin:12px 2px 8px}
-h1{font-size:20px;margin:0}
-.upd{color:var(--mut);font-size:12px;text-align:right}
-.stale{color:var(--warn)}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
-.kpi .l{color:var(--mut);font-size:12px}.kpi .v{font-size:20px;font-weight:700;margin-top:2px}
-h2{font-size:15px;margin:0 0 8px;color:var(--mut);font-weight:600}
-.up{color:var(--up)}.dn{color:var(--dn)}.mut{color:var(--mut)}
-.row{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
-.row:first-of-type{border-top:0}
-.sub{color:var(--mut);font-size:12px}
-.bar{height:6px;background:#21262d;border-radius:3px;margin-top:4px;overflow:hidden}.bar i{display:block;height:100%;background:#388bfd}
-a{color:#58a6ff;text-decoration:none}
-.empty{color:var(--mut);font-size:14px;padding:4px 0}
-.err{color:var(--dn);font-size:13px;margin-top:8px}
-</style>
+<link rel="stylesheet" href="css/style.css">
+<title>纸上交易台 · 策略看板</title>
 </head>
 <body>
-<div class="banner">纸上交易 · 不涉及真实资金</div>
-<header><h1>纸上交易台</h1><div class="upd" id="upd">加载中…</div></header>
-<div class="grid">
- <div class="kpi"><div class="l">现金</div><div class="v" id="cash">–</div></div>
- <div class="kpi"><div class="l">权益</div><div class="v" id="equity">–</div></div>
- <div class="kpi"><div class="l">起始资金</div><div class="v" id="start">–</div></div>
-</div>
-<div class="card"><div class="row" style="border:0;padding:0"><span>总盈亏</span><span id="pnl">–</span></div>
- <div class="row"><span>已实现盈亏</span><span id="real">–</span></div>
- <div class="row"><span>本会话起点</span><span id="sess">–</span></div></div>
-<div class="card"><h2>持仓 <span id="posn" class="sub"></span></h2><div id="pos"></div></div>
-<div class="card"><h2>最近成交 <span id="trn" class="sub"></span></h2><div id="trades"></div></div>
-<div class="card"><h2>任务统计</h2><div class="grid" id="tasks"></div></div>
-<div class="card"><h2>跳过原因分布</h2><div id="skips"></div></div>
-<div class="card"><h2>最近任务</h2><div id="recent"></div></div>
-<div class="err" id="err"></div>
-<p class="sub" style="text-align:center;margin-top:14px">每 60 秒自动刷新 · 数据每 5 分钟由交易台推送</p>
-<script>
-const $=id=>document.getElementById(id);
-const usd=v=>(v<0?'-$':'$')+Math.abs(+v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
-const sgn=v=>v>0?'up':v<0?'dn':'mut';
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const short=m=>m?m.slice(0,4)+'…'+m.slice(-4):'';
-const dex=m=>`<a href="https://dexscreener.com/solana/${encodeURIComponent(m)}" target="_blank" rel="noopener">${esc(short(m))}</a>`;
-const t=s=>s?String(s).replace('T',' ').slice(5,16):'';
-const R={dexscreener_new:'新币',aged_liquid:'老币有流动性',thin_pool:'池子太浅','missing_data:liq_usd':'缺流动性数据','missing_data:price':'缺价格数据',
- x_read:'X 舆情不通过','danger:Low Liquidity':'Rugcheck：流动性低',top10_heavy:'前十持仓过重',authority_open:'权限未放弃',non_json_answer:'Grok 回答格式异常',
- lp_unlocked:'LP 未锁',dev_heavy:'开发者持仓过高',risk_score:'风险分过高',too_young:'太新',too_old:'太老',low_confidence:'X 置信度不足',
- already_open:'已持仓',max_open:'持仓数已满',session_loss_halt:'会话熔断',cash_below_min_ticket:'现金不足最小单',lead:'线索',skip:'跳过',no_leads:'无线索',
- dexscreener_empty_or_unavailable:'DexScreener 无数据',entry:'入场',hard_stop:'硬止损',trail:'移动止损',time_stop:'时间止损',ladder:'阶梯止盈',liq_drop:'流动性骤降',
- rugged:'跑路盘',dev_holds:'开发者持仓过高',too_fresh:'太新',nobody_can_sell:'一小时零卖出（疑似蜜罐）',pool_gone:'池子没了',liquidity_pulled:'流动性被抽走',
- trailing_stop:'移动止损',take_profit_40:'止盈 +40%',take_profit_100:'止盈 +100%'};
-const zh=k=>R[k]||k;
-let lastGen='';
-function render(d){
- $('cash').textContent=usd(d.cash);$('equity').textContent=usd(d.equity);$('start').textContent=usd(d.start);
- $('pnl').innerHTML=`<span class="${sgn(d.pnl_total)}">${usd(d.pnl_total)} (${(d.pnl_total_pct>0?'+':'')+d.pnl_total_pct}%)</span>`;
- $('real').innerHTML=`<span class="${sgn(d.realized_pnl)}">${usd(d.realized_pnl)}</span>`;
- $('sess').textContent=`${usd(d.session_start)} · ${t(d.session_started_at)} PST`;
- const P=d.positions||[];$('posn').textContent=`${P.length} 个`;
- $('pos').innerHTML=P.length?P.map(p=>`<div class="row"><div><b>${esc(p.symbol)}</b> ${dex(p.mint)}<div class="sub">入场 ${p.entry} · 现价 ${p.last} · 开仓 ${esc(p.opened)}</div></div>
-  <div style="text-align:right"><div>${usd(p.value)}</div><div class="${sgn(p.pnl_pct)}">${p.pnl_pct==null?'–':(p.pnl_pct>0?'+':'')+p.pnl_pct+'%'}</div></div></div>`).join(''):'<div class="empty">暂无持仓</div>';
- const T=d.trades||[];$('trn').textContent=`共 ${d.trade_count||0} 笔`;
- $('trades').innerHTML=T.length?T.map(x=>`<div class="row"><div><b class="${x.action=='buy'?'up':'dn'}">${x.action=='buy'?'买入':'卖出'}</b> ${esc(x.symbol)} ${dex(x.mint)}<div class="sub">${t(x.time)} · ${esc(zh(x.reason))}</div></div>
-  <div style="text-align:right"><div>${usd(x.usd)}</div>${x.action=='sell'?`<div class="${sgn(x.pnl)}">${usd(x.pnl)}</div>`:''}</div></div>`).join(''):'<div class="empty">还没有成交（所有线索目前都被跳过）</div>';
- const k=d.tasks||{};
- $('tasks').innerHTML=[['总数',k.total],['线索',k.leads],['已验证',k.verified],['通过',k.approved],['扫描',k.scans],['无线索',k.no_leads]]
-  .map(([l,v])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v??0}</div></div>`).join('');
- const S=Object.entries(d.skip_reasons||{}),mx=Math.max(1,...S.map(s=>s[1]));
- $('skips').innerHTML=S.length?S.map(([r,n])=>`<div class="row" style="display:block"><div style="display:flex;justify-content:space-between"><span>${esc(zh(r))}</span><span>${n}</span></div><div class="bar"><i style="width:${n/mx*100}%"></i></div></div>`).join(''):'<div class="empty">暂无</div>';
- $('recent').innerHTML=(d.recent_tasks||[]).map(x=>`<div class="row"><div>${esc(x.agent)} · ${esc(zh(x.result))} ${dex(x.mint)}<div class="sub">${esc(x.reason.startsWith('x_read')?x.reason:zh(x.reason))}</div></div><div class="sub">${t(x.time)}</div></div>`).join('')||'<div class="empty">暂无</div>';
- lastGen=d.generated_at||'';
-}
-let fetchedAt=0;
-function stamp(){
- const age=fetchedAt?Math.round((Date.now()-fetchedAt)/1000):null;
- $('upd').innerHTML=`最后更新 ${esc(lastGen||'–')}<br><span class="${age!=null&&age>120?'stale':''}">${age==null?'':age<60?'刚刚检查':Math.floor(age/60)+' 分钟前检查'}</span>`;
-}
-async function load(){
- try{
-  const r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});
-  if(!r.ok)throw new Error('HTTP '+r.status);
-  render(await r.json());fetchedAt=Date.now();$('err').textContent='';
- }catch(e){$('err').textContent='数据加载失败：'+e.message+'（稍后自动重试）'}
- stamp();
-}
-load();setInterval(load,60000);setInterval(stamp,15000);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')load()});
-window.addEventListener('pageshow',load);window.addEventListener('focus',load);
-</script>
+<div class="preview-banner" id="preview-banner" role="note">预览版 · 纸上模拟，不是真实收益</div>
+<div class="paper-banner" id="paper-banner" role="note">纸上交易 · 不涉及真实资金</div>
+<div id="sample-banner" class="sample-banner" hidden>⚠ 示例数据：当前页面显示的全部是假数据，仅用于界面设计，不代表任何真实策略表现</div>
+
+<header class="topbar">
+  <div class="brand">
+    <!-- Logo 占位：图像生成师的方案定稿后替换 assets/logo.svg -->
+    <img src="assets/logo.svg" alt="" class="logo" width="32" height="32">
+    <div>
+      <h1>纸上交易台</h1>
+      <div class="muted small">多策略纸面对比看板</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="updated" id="updated">加载中…</div>
+    <button class="icon-btn" id="btn-colors" title="切换涨跌配色">配色：<span id="color-mode">绿涨红跌</span></button>
+  </div>
+</header>
+<!-- 错误条放在顶部（手机首屏可见），加载失败和显示出错都在这里说（BUG-003） -->
+<div class="err" id="err" role="alert" hidden></div>
+
+<nav class="tabs-main" id="nav">
+  <a href="#sec-strategies" class="on">策略对比</a>
+  <a href="#sec-kline">K 线</a>
+  <a href="#sec-records">成交与跳过</a>
+</nav>
+
+<main class="layout">
+  <!-- 策略对比 -->
+  <section id="sec-strategies" class="card span-2">
+    <div class="card-head">
+      <h2>策略对比</h2>
+      <div class="muted small" id="strat-summary"></div>
+    </div>
+    <div class="strat-cards" id="strat-cards"></div>
+    <div class="sub-head">
+      <h3>权益曲线</h3>
+      <div class="seg" id="curve-range">
+        <button data-r="1">1 天</button><button data-r="3">3 天</button><button data-r="7" class="on">7 天</button><button data-r="0">全部</button>
+      </div>
+    </div>
+    <div class="legend-row" id="curve-legend"></div>
+    <div class="chart" id="equity-chart"></div>
+    <h3 class="sub-title">排行</h3>
+    <div class="table-wrap">
+      <table class="tbl" id="rank-table">
+        <thead><tr>
+          <th>#</th><th>策略</th>
+          <th class="num sortable" data-k="pnl_pct">收益率</th>
+          <th class="num sortable" data-k="win_rate">胜率</th>
+          <th class="num sortable" data-k="closed_count" title="一买一卖算一笔（已完全平仓的仓位）">成交笔数</th>
+          <th class="num sortable" data-k="max_drawdown_pct">最大回撤</th>
+          <th class="num sortable" data-k="equity">权益</th>
+          <th class="num">持仓</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="small muted note">成交笔数：一买一卖算一笔（开仓到完全平仓；分批卖出仍算同一笔），仍在持仓的不算。胜率 = 净盈亏 &gt; 0 的笔数 ÷ 成交笔数。买/卖次数只作参考。</p>
+    <details class="strat-desc" id="strat-desc"><summary>策略说明（摘自 01-策略设计-交付.md）</summary><div id="strat-desc-body"></div></details>
+  </section>
+
+  <!-- K 线 -->
+  <section id="sec-kline" class="card span-2">
+    <div class="card-head">
+      <h2>K 线</h2>
+      <div class="seg" id="intervals">
+        <button data-i="1m">1m</button><button data-i="5m" class="on">5m</button><button data-i="15m">15m</button><button data-i="1h">1h</button>
+      </div>
+    </div>
+    <div class="token-bar" id="token-bar"></div>
+    <div class="kline-toolbar">
+      <label class="ctl">买卖点
+        <select id="marker-strategy"><option value="">全部策略</option></select>
+      </label>
+      <div class="ohlc mono" id="ohlc"></div>
+    </div>
+    <div class="kwrap"><div class="chart chart-kline" id="kline-chart"></div><div class="kstate" id="kline-state" hidden></div></div>
+    <div class="muted small kline-foot" id="kline-foot"></div>
+  </section>
+
+  <!-- 当前持仓 -->
+  <section id="sec-positions" class="card">
+    <div class="card-head"><h2>当前持仓</h2><div class="muted small" id="pos-count"></div></div>
+    <div id="positions"></div>
+  </section>
+
+  <!-- 成交与跳过 -->
+  <section id="sec-records" class="card">
+    <div class="card-head">
+      <div class="seg seg-lg" id="rec-tabs">
+        <button data-t="trades" class="on">成交记录</button><button data-t="skips">跳过记录</button><button data-t="events" title="扫描汇总、全局限额等不属于某个币的记录；不计入成交和跳过的笔数">扫描汇总</button>
+      </div>
+      <div class="muted small" id="rec-count"></div>
+    </div>
+    <div class="scan-line small" id="scan-line" hidden></div>
+    <div class="filters">
+      <select id="f-strategy"><option value="">全部策略</option></select>
+      <select id="f-token"><option value="">全部币</option></select>
+      <select id="f-action"></select>
+      <input id="f-q" type="search" placeholder="搜索币名 / 合约 / 原因">
+    </div>
+    <div class="table-wrap">
+      <table class="tbl tbl-records" id="rec-table"><thead></thead><tbody></tbody></table>
+    </div>
+    <div class="pager" id="pager"></div>
+  </section>
+</main>
+
+<footer class="muted small">每 60 秒自动刷新 · 时间为<span id="footer-tz">美西时间</span> · 点击成交记录可在 K 线上定位</footer>
+
+<script src="vendor/lightweight-charts.standalone.production.js"></script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
