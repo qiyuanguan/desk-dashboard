@@ -12,21 +12,21 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 197,
-  "scans": 108,
-  "leads": 87,
-  "verified": 87,
+  "total": 218,
+  "scans": 118,
+  "leads": 97,
+  "verified": 97,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
   "missing_data:liq_usd": 30,
-  "x_read": 14,
-  "missing_data:bonding_curve": 14,
-  "thin_pool": 13,
-  "danger:Low Liquidity": 5,
+  "missing_data:bonding_curve": 19,
+  "x_read": 15,
+  "thin_pool": 14,
+  "danger:Low Liquidity": 7,
   "missing_data:price": 4,
-  "danger:Large Amount of LP Unlocked": 2,
+  "danger:Large Amount of LP Unlocked": 3,
   "top10_heavy": 1,
   "authority_open": 1,
   "non_json_answer": 1,
@@ -35,126 +35,126 @@
  },
  "recent_tasks": [
   {
-   "time": "2026-11-02T01:00:53",
+   "time": "2026-11-02T01:09:18",
    "agent": "SCAN",
    "action": "scan_summary",
    "mint": "-",
    "result": "summary",
-   "reason": "{\"raw\":120,\"queued\":{\"gt_trending_5m\":2,\"graduated\":1,\"dexscreener_new\":16},\"verified\":12,\"fills\":0,\"gt_ok\":4,\"watch\":37,\"watch_added\":14,\"g"
+   "reason": "{\"raw\":119,\"queued\":{\"gt_trending_5m\":2,\"gt_trending_1h\":1,\"dexscreener_new\":7},\"verified\":10,\"fills\":0,\"gt_ok\":4,\"watch\":55,\"watch_added\":1"
   },
   {
-   "time": "2026-11-02T01:00:53",
+   "time": "2026-11-02T01:09:18",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "6nuBXMpJxTAsu7AsWQe6k7G1Sd5zttwayAPQWnbxDvWf",
+   "mint": "DmXnBHtMv98vvJQTYyVs8Kwy9AfT7G6KvjizktJEFxmr",
    "result": "skip",
-   "reason": "thin_pool"
+   "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:00:53",
-   "agent": "SCAN-4",
+   "time": "2026-11-02T01:09:18",
+   "agent": "SCAN-2",
    "action": "scan",
-   "mint": "6nuBXMpJxTAsu7AsWQe6k7G1Sd5zttwayAPQWnbxDvWf",
+   "mint": "DmXnBHtMv98vvJQTYyVs8Kwy9AfT7G6KvjizktJEFxmr",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:00:52",
+   "time": "2026-11-02T01:09:17",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "H2x9x3wkUFDMvAXJrsXWwSxeYLCw369n1mjpuEgcpump",
+   "mint": "G6KTcxD7nJT4poBZsGiANHZHcUvPoDLjaVVZhBPdpump",
+   "result": "skip",
+   "reason": "thin_pool"
+  },
+  {
+   "time": "2026-11-02T01:09:17",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "G6KTcxD7nJT4poBZsGiANHZHcUvPoDLjaVVZhBPdpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:09:16",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "7FRnPLiMZkhLrPLCGmDbgd8w82gcWL9hDKvjM2NLpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:09:16",
+   "agent": "SCAN-4",
+   "action": "scan",
+   "mint": "7FRnPLiMZkhLrPLCGmDbgd8w82gcWL9hDKvjM2NLpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:09:15",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "DkpL2e59QKGdrHnNHUDmy9ieWbmMHeHfMh4kA6bEpump",
    "result": "skip",
    "reason": "danger:Low Liquidity"
   },
   {
-   "time": "2026-11-02T01:00:52",
+   "time": "2026-11-02T01:09:15",
    "agent": "SCAN-3",
    "action": "scan",
-   "mint": "H2x9x3wkUFDMvAXJrsXWwSxeYLCw369n1mjpuEgcpump",
+   "mint": "DkpL2e59QKGdrHnNHUDmy9ieWbmMHeHfMh4kA6bEpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:00:51",
+   "time": "2026-11-02T01:09:14",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
+   "mint": "B6fSFYV84wjjPN2Rej1fai1tgF9qbVtj4a32Kej9pump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:00:51",
+   "time": "2026-11-02T01:09:14",
    "agent": "SCAN-2",
    "action": "scan",
-   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
+   "mint": "B6fSFYV84wjjPN2Rej1fai1tgF9qbVtj4a32Kej9pump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:00:47",
+   "time": "2026-11-02T01:09:14",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
+   "mint": "FxFaz4oaoE8tnLKozVoPVXR4vCSEeJnp6PxKAWUmpump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:00:47",
+   "time": "2026-11-02T01:09:14",
    "agent": "SCAN-1",
    "action": "scan",
-   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
+   "mint": "FxFaz4oaoE8tnLKozVoPVXR4vCSEeJnp6PxKAWUmpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:00:46",
+   "time": "2026-11-02T01:09:13",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
+   "mint": "7NwMcsud7zxu1L4XkHkyjHQFMq8Zazk5dGQqBuUppump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:00:46",
+   "time": "2026-11-02T01:09:13",
    "agent": "SCAN-4",
    "action": "scan",
-   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:00:46",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:00:46",
-   "agent": "SCAN-3",
-   "action": "scan",
-   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:00:45",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
-   "result": "skip",
-   "reason": "thin_pool"
-  },
-  {
-   "time": "2026-11-02T01:00:45",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
+   "mint": "7NwMcsud7zxu1L4XkHkyjHQFMq8Zazk5dGQqBuUppump",
    "result": "lead",
    "reason": "dexscreener_new"
   }
  ],
- "last_task_at": "2026-11-02T01:00:53",
- "generated_at": "2026-11-02 01:00:53 PST"
+ "last_task_at": "2026-11-02T01:09:18",
+ "generated_at": "2026-11-02 01:09:18 PST"
 }
