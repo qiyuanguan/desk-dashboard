@@ -12,146 +12,148 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 147,
-  "scans": 84,
-  "leads": 63,
-  "verified": 63,
+  "total": 172,
+  "scans": 96,
+  "leads": 75,
+  "verified": 75,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
-  "missing_data:liq_usd": 27,
-  "x_read": 11,
-  "thin_pool": 10,
-  "missing_data:bonding_curve": 5,
+  "missing_data:liq_usd": 29,
+  "x_read": 14,
+  "thin_pool": 11,
+  "missing_data:bonding_curve": 9,
   "missing_data:price": 4,
   "danger:Low Liquidity": 3,
   "top10_heavy": 1,
   "authority_open": 1,
-  "non_json_answer": 1
+  "non_json_answer": 1,
+  "danger:Large Amount of LP Unlocked": 1,
+  "danger:Creator history of rugged tokens": 1
  },
  "recent_tasks": [
   {
-   "time": "2026-11-02T00:53:39",
+   "time": "2026-11-02T00:59:24",
+   "agent": "SCAN",
+   "action": "scan_summary",
+   "mint": "-",
+   "result": "summary",
+   "reason": "{\"raw\":119,\"queued\":{\"gt_trending_5m\":3,\"gt_trending_1h\":1,\"aged_liquid\":2,\"dexscreener_new\":22},\"verified\":12,\"fills\":0,\"gt_ok\":4,\"watch\":2"
+  },
+  {
+   "time": "2026-11-02T00:59:24",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "5LzxH9n4Nb6r3crThMwdjWuC7PFtQL3sXjwkb2Fcpump",
+   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T00:53:39",
-   "agent": "SCAN-2",
+   "time": "2026-11-02T00:59:24",
+   "agent": "SCAN-4",
    "action": "scan",
-   "mint": "5LzxH9n4Nb6r3crThMwdjWuC7PFtQL3sXjwkb2Fcpump",
+   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T00:53:39",
+   "time": "2026-11-02T00:59:23",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "FAqiaGmrSdx2Z5qZmSRUkbyYCF2dFCUTfYVwP4Mypump",
+   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
    "result": "skip",
-   "reason": "x_read: 该合约只被零互动警报机器人提及，声称的账号无帖可查，没有真实社区痕迹，不确定。"
+   "reason": "thin_pool"
   },
   {
-   "time": "2026-11-02T00:53:12",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "FAqiaGmrSdx2Z5qZmSRUkbyYCF2dFCUTfYVwP4Mypump",
-   "result": "lead",
-   "reason": "aged_liquid"
-  },
-  {
-   "time": "2026-11-02T00:45:27",
-   "agent": "SCAN",
-   "action": "scan",
-   "mint": "-",
-   "result": "no_leads",
-   "reason": "all_39_already_judged"
-  },
-  {
-   "time": "2026-11-02T00:42:51",
-   "agent": "SCAN",
-   "action": "scan",
-   "mint": "-",
-   "result": "no_leads",
-   "reason": "all_40_already_judged"
-  },
-  {
-   "time": "2026-11-02T00:38:23",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "8Wi25nQhEay9KwAsoguEs3y1uxaJmCRQxRYnSY9dpump",
-   "result": "skip",
-   "reason": "x_read: 同一小时内多个喊单号贴出一字不差的收益文案带这个合约，且$Learjet同时挂着别的地址，热度像买来的。"
-  },
-  {
-   "time": "2026-11-02T00:37:26",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "8Wi25nQhEay9KwAsoguEs3y1uxaJmCRQxRYnSY9dpump",
-   "result": "lead",
-   "reason": "aged_liquid"
-  },
-  {
-   "time": "2026-11-02T00:37:26",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "8pjfN5Ayb4rucGpYE3tZWN6v3EysizjPx1v62zx1pump",
-   "result": "skip",
-   "reason": "x_read: 同一代号已挂多个不同合约，该地址部署者被指连发数百个盘且无一毕业，并被点名与重复图表的跑路圈有关。"
-  },
-  {
-   "time": "2026-11-02T00:37:00",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "8pjfN5Ayb4rucGpYE3tZWN6v3EysizjPx1v62zx1pump",
-   "result": "lead",
-   "reason": "aged_liquid"
-  },
-  {
-   "time": "2026-11-02T00:37:00",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "93VGqXL76voGxc43apJTDJoKkqnxTht1BKWoEmUypump",
-   "result": "skip",
-   "reason": "x_read: 同一小时内多个无关账号用同一模板配随机后缀和netlify钓鱼投票链接刷这个合约，属于买来的热度，没有真实社区。"
-  },
-  {
-   "time": "2026-11-02T00:36:21",
-   "agent": "SCAN-4",
-   "action": "scan",
-   "mint": "93VGqXL76voGxc43apJTDJoKkqnxTht1BKWoEmUypump",
-   "result": "lead",
-   "reason": "aged_liquid"
-  },
-  {
-   "time": "2026-11-02T00:36:21",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "GoDSW31bTxfkoup9yA1qcGGx9RMXdTEWgApv3xzBmoA",
-   "result": "skip",
-   "reason": "x_read: 同一小时内多账号用同一套投票文案加一次性 netlify 链接刷热度，并配几分钟内的假倍数喊单，属于买来的热度。"
-  },
-  {
-   "time": "2026-11-02T00:35:58",
+   "time": "2026-11-02T00:59:23",
    "agent": "SCAN-3",
    "action": "scan",
-   "mint": "GoDSW31bTxfkoup9yA1qcGGx9RMXdTEWgApv3xzBmoA",
+   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
    "result": "lead",
-   "reason": "aged_liquid"
+   "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T00:35:58",
+   "time": "2026-11-02T00:59:23",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "7Ypg1rKLu8q32E1AQEDjaPCg8dfGeCSsMkFnK98zcash",
+   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
    "result": "skip",
-   "reason": "x_read: 同一小时内多个喊单号用近乎同一套文案推这个合约并引流VIP电报，其中一个简介写被盗、另一个还把代号贴错，是买来的热度。"
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T00:59:23",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T00:59:22",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "GD52VfoPZdad4hiNPg4UnjtDGsS4WiM3mqS8j1czpump",
+   "result": "skip",
+   "reason": "danger:Creator history of rugged tokens"
+  },
+  {
+   "time": "2026-11-02T00:59:22",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "GD52VfoPZdad4hiNPg4UnjtDGsS4WiM3mqS8j1czpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T00:59:21",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T00:59:21",
+   "agent": "SCAN-4",
+   "action": "scan",
+   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T00:59:21",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T00:59:21",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T00:59:20",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "6g16UK4wHoFhC7PCmw8LYYCdt9q8m99fyoAwxeCrpump",
+   "result": "skip",
+   "reason": "x_read: 同一小时内一批账号用几乎相同的喊单文案和钓鱼投票链接刷热度，最早帖子也是买来的喊单而非真实社区。"
+  },
+  {
+   "time": "2026-11-02T00:59:20",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "6g16UK4wHoFhC7PCmw8LYYCdt9q8m99fyoAwxeCrpump",
+   "result": "lead",
+   "reason": "aged_liquid"
   }
  ],
- "last_task_at": "2026-11-02T00:53:39",
- "generated_at": "2026-11-02 00:53:39 PST"
+ "last_task_at": "2026-11-02T00:59:24",
+ "generated_at": "2026-11-02 00:59:25 PST"
 }
