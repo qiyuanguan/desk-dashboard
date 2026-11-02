@@ -1,0 +1,156 @@
+{
+ "paper": true,
+ "cash": 50.0,
+ "equity": 50.0,
+ "start": 50.0,
+ "pnl_total": 0.0,
+ "pnl_total_pct": 0.0,
+ "session_start": 50.0,
+ "session_started_at": "2026-11-01T20:34:06",
+ "realized_pnl": 0,
+ "positions": [],
+ "trades": [],
+ "trade_count": 0,
+ "tasks": {
+  "total": 105,
+  "scans": 59,
+  "leads": 46,
+  "verified": 46,
+  "approved": 0,
+  "no_leads": 13
+ },
+ "skip_reasons": {
+  "missing_data:liq_usd": 23,
+  "thin_pool": 9,
+  "missing_data:price": 4,
+  "x_read": 4,
+  "danger:Low Liquidity": 3,
+  "top10_heavy": 1,
+  "authority_open": 1,
+  "non_json_answer": 1
+ },
+ "recent_tasks": [
+  {
+   "time": "2026-11-01T23:33:44",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
+   "result": "skip",
+   "reason": "thin_pool"
+  },
+  {
+   "time": "2026-11-01T23:33:43",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-01T23:27:04",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
+   "result": "skip",
+   "reason": "missing_data:liq_usd"
+  },
+  {
+   "time": "2026-11-01T23:27:03",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-01T23:27:03",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
+   "result": "skip",
+   "reason": "missing_data:liq_usd"
+  },
+  {
+   "time": "2026-11-01T23:27:02",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-01T23:20:25",
+   "agent": "SCAN",
+   "action": "scan",
+   "mint": "-",
+   "result": "no_leads",
+   "reason": "dexscreener_empty_or_unavailable"
+  },
+  {
+   "time": "2026-11-01T23:20:19",
+   "agent": "SCAN",
+   "action": "scan",
+   "mint": "-",
+   "result": "no_leads",
+   "reason": "dexscreener_empty_or_unavailable"
+  },
+  {
+   "time": "2026-11-01T23:18:46",
+   "agent": "SCAN",
+   "action": "scan",
+   "mint": "-",
+   "result": "no_leads",
+   "reason": "dexscreener_empty_or_unavailable"
+  },
+  {
+   "time": "2026-11-01T23:18:38",
+   "agent": "SCAN",
+   "action": "scan",
+   "mint": "-",
+   "result": "no_leads",
+   "reason": "dexscreener_empty_or_unavailable"
+  },
+  {
+   "time": "2026-11-01T23:14:38",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
+   "result": "skip",
+   "reason": "missing_data:liq_usd"
+  },
+  {
+   "time": "2026-11-01T23:14:37",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-01T23:14:37",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
+   "result": "skip",
+   "reason": "missing_data:price"
+  },
+  {
+   "time": "2026-11-01T23:14:36",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-01T23:07:07",
+   "agent": "SCAN",
+   "action": "scan",
+   "mint": "-",
+   "result": "no_leads",
+   "reason": "dexscreener_empty_or_unavailable"
+  }
+ ],
+ "last_task_at": "2026-11-01T23:33:44",
+ "generated_at": "2026-11-01 23:36:09 PST"
+}
