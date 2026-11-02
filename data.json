@@ -12,149 +12,149 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 263,
-  "scans": 138,
-  "leads": 117,
-  "verified": 117,
+  "total": 288,
+  "scans": 150,
+  "leads": 129,
+  "verified": 129,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
+  "missing_data:bonding_curve": 33,
   "missing_data:liq_usd": 32,
-  "missing_data:bonding_curve": 26,
   "x_read": 17,
-  "thin_pool": 15,
+  "thin_pool": 16,
+  "danger:Low Liquidity": 10,
   "danger:Large Amount of LP Unlocked": 9,
-  "danger:Low Liquidity": 7,
   "missing_data:price": 4,
   "danger:Top 10 holders high ownership": 3,
-  "top10_heavy": 1,
+  "top10_heavy": 2,
   "authority_open": 1,
   "non_json_answer": 1,
   "danger:Creator history of rugged tokens": 1
  },
  "recent_tasks": [
   {
-   "time": "2026-11-02T01:30:36",
+   "time": "2026-11-02T01:38:46",
    "agent": "SCAN",
    "action": "scan_summary",
    "mint": "-",
    "result": "summary",
-   "reason": "{\"raw\":122,\"queued\":{\"gt_trending_5m\":5,\"dexscreener_new\":5},\"verified\":10,\"fills\":0,\"gt_ok\":4,\"watch\":136,\"watch_added\":15,\"graduated\":0,\"r"
+   "reason": "{\"raw\":122,\"queued\":{\"gt_trending_5m\":1,\"dexscreener_new\":11},\"verified\":12,\"fills\":0,\"gt_ok\":4,\"watch\":154,\"watch_added\":18,\"graduated\":0,\""
   },
   {
-   "time": "2026-11-02T01:30:36",
+   "time": "2026-11-02T01:38:46",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:30:36",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:30:35",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
+   "mint": "6nuBXMpJxTAsu7AsWQe6k7G1Sd5zttwayAPQWnbxDvWf",
    "result": "skip",
    "reason": "thin_pool"
   },
   {
-   "time": "2026-11-02T01:30:35",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:30:34",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:30:34",
+   "time": "2026-11-02T01:38:46",
    "agent": "SCAN-4",
    "action": "scan",
-   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
+   "mint": "6nuBXMpJxTAsu7AsWQe6k7G1Sd5zttwayAPQWnbxDvWf",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:30:33",
+   "time": "2026-11-02T01:38:45",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
+   "mint": "H2x9x3wkUFDMvAXJrsXWwSxeYLCw369n1mjpuEgcpump",
    "result": "skip",
-   "reason": "missing_data:bonding_curve"
+   "reason": "danger:Low Liquidity"
   },
   {
-   "time": "2026-11-02T01:30:33",
+   "time": "2026-11-02T01:38:45",
    "agent": "SCAN-3",
    "action": "scan",
-   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
+   "mint": "H2x9x3wkUFDMvAXJrsXWwSxeYLCw369n1mjpuEgcpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:30:33",
+   "time": "2026-11-02T01:38:44",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:30:33",
+   "time": "2026-11-02T01:38:44",
    "agent": "SCAN-2",
    "action": "scan",
-   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:30:32",
+   "time": "2026-11-02T01:38:44",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "4he9D3iDeB6wHvaVVo5NCSJPeNPjVFeDUcRM9BZhrAYK",
+   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
    "result": "skip",
-   "reason": "danger:Large Amount of LP Unlocked"
+   "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:30:32",
+   "time": "2026-11-02T01:38:44",
    "agent": "SCAN-1",
    "action": "scan",
-   "mint": "4he9D3iDeB6wHvaVVo5NCSJPeNPjVFeDUcRM9BZhrAYK",
+   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
    "result": "lead",
-   "reason": "gt_trending_5m"
+   "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:30:31",
+   "time": "2026-11-02T01:38:43",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "36SMRheN4wzdUoUh7zk4KcFr4DAT2HaxPncZ2QgVcRTz",
+   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
    "result": "skip",
-   "reason": "danger:Large Amount of LP Unlocked"
+   "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:30:31",
+   "time": "2026-11-02T01:38:43",
    "agent": "SCAN-4",
    "action": "scan",
-   "mint": "36SMRheN4wzdUoUh7zk4KcFr4DAT2HaxPncZ2QgVcRTz",
+   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
    "result": "lead",
-   "reason": "gt_trending_5m"
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:38:42",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:38:42",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:38:42",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
+   "result": "skip",
+   "reason": "danger:Low Liquidity"
+  },
+  {
+   "time": "2026-11-02T01:38:42",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
   }
  ],
- "last_task_at": "2026-11-02T01:30:36",
- "generated_at": "2026-11-02 01:30:36 PST"
+ "last_task_at": "2026-11-02T01:38:46",
+ "generated_at": "2026-11-02 01:38:46 PST"
 }
