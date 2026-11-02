@@ -12,25 +12,57 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 143,
-  "scans": 82,
-  "leads": 61,
-  "verified": 61,
+  "total": 147,
+  "scans": 84,
+  "leads": 63,
+  "verified": 63,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
   "missing_data:liq_usd": 27,
+  "x_read": 11,
   "thin_pool": 10,
-  "x_read": 10,
+  "missing_data:bonding_curve": 5,
   "missing_data:price": 4,
-  "missing_data:bonding_curve": 4,
   "danger:Low Liquidity": 3,
   "top10_heavy": 1,
   "authority_open": 1,
   "non_json_answer": 1
  },
  "recent_tasks": [
+  {
+   "time": "2026-11-02T00:53:39",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "5LzxH9n4Nb6r3crThMwdjWuC7PFtQL3sXjwkb2Fcpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T00:53:39",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "5LzxH9n4Nb6r3crThMwdjWuC7PFtQL3sXjwkb2Fcpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T00:53:39",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "FAqiaGmrSdx2Z5qZmSRUkbyYCF2dFCUTfYVwP4Mypump",
+   "result": "skip",
+   "reason": "x_read: 该合约只被零互动警报机器人提及，声称的账号无帖可查，没有真实社区痕迹，不确定。"
+  },
+  {
+   "time": "2026-11-02T00:53:12",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "FAqiaGmrSdx2Z5qZmSRUkbyYCF2dFCUTfYVwP4Mypump",
+   "result": "lead",
+   "reason": "aged_liquid"
+  },
   {
    "time": "2026-11-02T00:45:27",
    "agent": "SCAN",
@@ -118,40 +150,8 @@
    "mint": "7Ypg1rKLu8q32E1AQEDjaPCg8dfGeCSsMkFnK98zcash",
    "result": "skip",
    "reason": "x_read: 同一小时内多个喊单号用近乎同一套文案推这个合约并引流VIP电报，其中一个简介写被盗、另一个还把代号贴错，是买来的热度。"
-  },
-  {
-   "time": "2026-11-02T00:34:49",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "7Ypg1rKLu8q32E1AQEDjaPCg8dfGeCSsMkFnK98zcash",
-   "result": "lead",
-   "reason": "aged_liquid"
-  },
-  {
-   "time": "2026-11-02T00:34:49",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "4eq4JfnpdgqZTzeyR3GnRGHJQ3QhQT6Lp7nKnQ2nS7Rv",
-   "result": "skip",
-   "reason": "x_read: 同一代号UNSAFU已挂多个不同合约，本盘官方号不足一天且自称币安官方，属于蹭名仿盘。"
-  },
-  {
-   "time": "2026-11-02T00:34:16",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "4eq4JfnpdgqZTzeyR3GnRGHJQ3QhQT6Lp7nKnQ2nS7Rv",
-   "result": "lead",
-   "reason": "aged_liquid"
-  },
-  {
-   "time": "2026-11-02T00:26:21",
-   "agent": "SCAN",
-   "action": "scan",
-   "mint": "-",
-   "result": "no_leads",
-   "reason": "all_33_already_judged"
   }
  ],
- "last_task_at": "2026-11-02T00:45:27",
- "generated_at": "2026-11-02 00:45:27 PST"
+ "last_task_at": "2026-11-02T00:53:39",
+ "generated_at": "2026-11-02 00:53:39 PST"
 }
