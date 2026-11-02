@@ -12,28 +12,84 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 230,
-  "scans": 123,
-  "leads": 102,
-  "verified": 102,
+  "total": 237,
+  "scans": 126,
+  "leads": 105,
+  "verified": 105,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
   "missing_data:liq_usd": 30,
-  "missing_data:bonding_curve": 20,
+  "missing_data:bonding_curve": 21,
   "x_read": 17,
   "thin_pool": 14,
   "danger:Low Liquidity": 7,
+  "danger:Large Amount of LP Unlocked": 5,
   "missing_data:price": 4,
-  "danger:Large Amount of LP Unlocked": 4,
-  "danger:Top 10 holders high ownership": 2,
+  "danger:Top 10 holders high ownership": 3,
   "top10_heavy": 1,
   "authority_open": 1,
   "non_json_answer": 1,
   "danger:Creator history of rugged tokens": 1
  },
  "recent_tasks": [
+  {
+   "time": "2026-11-02T01:23:35",
+   "agent": "SCAN",
+   "action": "scan_summary",
+   "mint": "-",
+   "result": "summary",
+   "reason": "{\"raw\":123,\"queued\":{\"gt_trending_5m\":1,\"graduated\":1,\"dexscreener_new\":1},\"verified\":3,\"fills\":0,\"gt_ok\":4,\"watch\":104,\"watch_added\":17,\"gr"
+  },
+  {
+   "time": "2026-11-02T01:23:35",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "FQpyYoUGfAd2vQwhtthdHFyBYizAQHdCVMWeC3bZpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:23:35",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "FQpyYoUGfAd2vQwhtthdHFyBYizAQHdCVMWeC3bZpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:23:34",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "E2hxRZwARrAMZEoSnFq1hNRCR6ys4occ59Ug8YLBpump",
+   "result": "skip",
+   "reason": "danger:Top 10 holders high ownership"
+  },
+  {
+   "time": "2026-11-02T01:23:34",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "E2hxRZwARrAMZEoSnFq1hNRCR6ys4occ59Ug8YLBpump",
+   "result": "lead",
+   "reason": "graduated"
+  },
+  {
+   "time": "2026-11-02T01:23:34",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "7mWGPMfPyoGV57GyeVK4ZiWkBCoDNeQxAHT8Fd2WduTQ",
+   "result": "skip",
+   "reason": "danger:Large Amount of LP Unlocked"
+  },
+  {
+   "time": "2026-11-02T01:23:34",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "7mWGPMfPyoGV57GyeVK4ZiWkBCoDNeQxAHT8Fd2WduTQ",
+   "result": "lead",
+   "reason": "gt_trending_5m"
+  },
   {
    "time": "2026-11-02T01:18:28",
    "agent": "SCAN",
@@ -97,64 +153,8 @@
    "mint": "-",
    "result": "summary",
    "reason": "{\"raw\":118,\"queued\":{\"gt_trending_5m\":2},\"verified\":2,\"fills\":0,\"gt_ok\":4,\"watch\":73,\"watch_added\":14,\"graduated\":0,\"recheck\":0,\"not_due\":42"
-  },
-  {
-   "time": "2026-11-02T01:14:45",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "fX7VS1fmMMXH1gNof4TWMJYEsLfNcuF1LqhidYYpump",
-   "result": "skip",
-   "reason": "x_read: 同一代号MUSKX同时对应多个不同合约（含xGVjp…pump与AngYSL…pump），本地址热度来自推TG的喊单号，属仿盘。"
-  },
-  {
-   "time": "2026-11-02T01:14:45",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "fX7VS1fmMMXH1gNof4TWMJYEsLfNcuF1LqhidYYpump",
-   "result": "lead",
-   "reason": "gt_trending_5m"
-  },
-  {
-   "time": "2026-11-02T01:14:23",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "12w4CpSDEx4H18Gmk3ShHb973cePFcRLbBmZWgHhRXXG",
-   "result": "skip",
-   "reason": "danger:Large Amount of LP Unlocked"
-  },
-  {
-   "time": "2026-11-02T01:14:23",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "12w4CpSDEx4H18Gmk3ShHb973cePFcRLbBmZWgHhRXXG",
-   "result": "lead",
-   "reason": "gt_trending_5m"
-  },
-  {
-   "time": "2026-11-02T01:09:18",
-   "agent": "SCAN",
-   "action": "scan_summary",
-   "mint": "-",
-   "result": "summary",
-   "reason": "{\"raw\":119,\"queued\":{\"gt_trending_5m\":2,\"gt_trending_1h\":1,\"dexscreener_new\":7},\"verified\":10,\"fills\":0,\"gt_ok\":4,\"watch\":55,\"watch_added\":1"
-  },
-  {
-   "time": "2026-11-02T01:09:18",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "DmXnBHtMv98vvJQTYyVs8Kwy9AfT7G6KvjizktJEFxmr",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:09:18",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "DmXnBHtMv98vvJQTYyVs8Kwy9AfT7G6KvjizktJEFxmr",
-   "result": "lead",
-   "reason": "dexscreener_new"
   }
  ],
- "last_task_at": "2026-11-02T01:18:28",
- "generated_at": "2026-11-02 01:18:28 PST"
+ "last_task_at": "2026-11-02T01:23:35",
+ "generated_at": "2026-11-02 01:23:35 PST"
 }
