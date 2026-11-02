@@ -12,21 +12,21 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 218,
-  "scans": 118,
-  "leads": 97,
-  "verified": 97,
+  "total": 223,
+  "scans": 120,
+  "leads": 99,
+  "verified": 99,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
   "missing_data:liq_usd": 30,
   "missing_data:bonding_curve": 19,
-  "x_read": 15,
+  "x_read": 16,
   "thin_pool": 14,
   "danger:Low Liquidity": 7,
   "missing_data:price": 4,
-  "danger:Large Amount of LP Unlocked": 3,
+  "danger:Large Amount of LP Unlocked": 4,
   "top10_heavy": 1,
   "authority_open": 1,
   "non_json_answer": 1,
@@ -34,6 +34,46 @@
   "danger:Top 10 holders high ownership": 1
  },
  "recent_tasks": [
+  {
+   "time": "2026-11-02T01:14:45",
+   "agent": "SCAN",
+   "action": "scan_summary",
+   "mint": "-",
+   "result": "summary",
+   "reason": "{\"raw\":118,\"queued\":{\"gt_trending_5m\":2},\"verified\":2,\"fills\":0,\"gt_ok\":4,\"watch\":73,\"watch_added\":14,\"graduated\":0,\"recheck\":0,\"not_due\":42"
+  },
+  {
+   "time": "2026-11-02T01:14:45",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "fX7VS1fmMMXH1gNof4TWMJYEsLfNcuF1LqhidYYpump",
+   "result": "skip",
+   "reason": "x_read: 同一代号MUSKX同时对应多个不同合约（含xGVjp…pump与AngYSL…pump），本地址热度来自推TG的喊单号，属仿盘。"
+  },
+  {
+   "time": "2026-11-02T01:14:45",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "fX7VS1fmMMXH1gNof4TWMJYEsLfNcuF1LqhidYYpump",
+   "result": "lead",
+   "reason": "gt_trending_5m"
+  },
+  {
+   "time": "2026-11-02T01:14:23",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "12w4CpSDEx4H18Gmk3ShHb973cePFcRLbBmZWgHhRXXG",
+   "result": "skip",
+   "reason": "danger:Large Amount of LP Unlocked"
+  },
+  {
+   "time": "2026-11-02T01:14:23",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "12w4CpSDEx4H18Gmk3ShHb973cePFcRLbBmZWgHhRXXG",
+   "result": "lead",
+   "reason": "gt_trending_5m"
+  },
   {
    "time": "2026-11-02T01:09:18",
    "agent": "SCAN",
@@ -113,48 +153,8 @@
    "mint": "B6fSFYV84wjjPN2Rej1fai1tgF9qbVtj4a32Kej9pump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:09:14",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "B6fSFYV84wjjPN2Rej1fai1tgF9qbVtj4a32Kej9pump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:09:14",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "FxFaz4oaoE8tnLKozVoPVXR4vCSEeJnp6PxKAWUmpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:09:14",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "FxFaz4oaoE8tnLKozVoPVXR4vCSEeJnp6PxKAWUmpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:09:13",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "7NwMcsud7zxu1L4XkHkyjHQFMq8Zazk5dGQqBuUppump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:09:13",
-   "agent": "SCAN-4",
-   "action": "scan",
-   "mint": "7NwMcsud7zxu1L4XkHkyjHQFMq8Zazk5dGQqBuUppump",
-   "result": "lead",
-   "reason": "dexscreener_new"
   }
  ],
- "last_task_at": "2026-11-02T01:09:18",
- "generated_at": "2026-11-02 01:09:18 PST"
+ "last_task_at": "2026-11-02T01:14:45",
+ "generated_at": "2026-11-02 01:14:45 PST"
 }
