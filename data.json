@@ -12,10 +12,10 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 121,
-  "scans": 69,
-  "leads": 52,
-  "verified": 52,
+  "total": 123,
+  "scans": 70,
+  "leads": 53,
+  "verified": 53,
   "approved": 0,
   "no_leads": 17
  },
@@ -25,12 +25,28 @@
   "missing_data:price": 4,
   "x_read": 4,
   "danger:Low Liquidity": 3,
+  "missing_data:bonding_curve": 2,
   "top10_heavy": 1,
   "authority_open": 1,
-  "non_json_answer": 1,
-  "missing_data:bonding_curve": 1
+  "non_json_answer": 1
  },
  "recent_tasks": [
+  {
+   "time": "2026-11-02T00:07:52",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "GD52VfoPZdad4hiNPg4UnjtDGsS4WiM3mqS8j1czpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T00:07:51",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "GD52VfoPZdad4hiNPg4UnjtDGsS4WiM3mqS8j1czpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
   {
    "time": "2026-11-02T00:00:55",
    "agent": "SCAN",
@@ -134,24 +150,8 @@
    "mint": "ATnGk91tqFpXhiqAnDfGav7YYMUiocQ2YHgY4gPBpump",
    "result": "skip",
    "reason": "thin_pool"
-  },
-  {
-   "time": "2026-11-01T23:37:35",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "ATnGk91tqFpXhiqAnDfGav7YYMUiocQ2YHgY4gPBpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-01T23:37:35",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "13gXpoCarC5Zj7T6gQcEjm8ctapk4PTRDMWhKnYdpump",
-   "result": "skip",
-   "reason": "missing_data:liq_usd"
   }
  ],
- "last_task_at": "2026-11-02T00:00:55",
- "generated_at": "2026-11-02 00:00:55 PST"
+ "last_task_at": "2026-11-02T00:07:52",
+ "generated_at": "2026-11-02 00:07:52 PST"
 }
