@@ -12,20 +12,20 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 242,
-  "scans": 128,
-  "leads": 107,
-  "verified": 107,
+  "total": 263,
+  "scans": 138,
+  "leads": 117,
+  "verified": 117,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
-  "missing_data:liq_usd": 30,
-  "missing_data:bonding_curve": 22,
+  "missing_data:liq_usd": 32,
+  "missing_data:bonding_curve": 26,
   "x_read": 17,
-  "thin_pool": 14,
+  "thin_pool": 15,
+  "danger:Large Amount of LP Unlocked": 9,
   "danger:Low Liquidity": 7,
-  "danger:Large Amount of LP Unlocked": 6,
   "missing_data:price": 4,
   "danger:Top 10 holders high ownership": 3,
   "top10_heavy": 1,
@@ -35,126 +35,126 @@
  },
  "recent_tasks": [
   {
-   "time": "2026-11-02T01:28:27",
+   "time": "2026-11-02T01:30:36",
    "agent": "SCAN",
    "action": "scan_summary",
    "mint": "-",
    "result": "summary",
-   "reason": "{\"raw\":122,\"queued\":{\"gt_trending_5m\":1,\"dexscreener_new\":1},\"verified\":2,\"fills\":0,\"gt_ok\":4,\"watch\":121,\"watch_added\":16,\"graduated\":0,\"re"
+   "reason": "{\"raw\":122,\"queued\":{\"gt_trending_5m\":5,\"dexscreener_new\":5},\"verified\":10,\"fills\":0,\"gt_ok\":4,\"watch\":136,\"watch_added\":15,\"graduated\":0,\"r"
   },
   {
-   "time": "2026-11-02T01:28:27",
+   "time": "2026-11-02T01:30:36",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "5LzxH9n4Nb6r3crThMwdjWuC7PFtQL3sXjwkb2Fcpump",
+   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:28:27",
+   "time": "2026-11-02T01:30:36",
    "agent": "SCAN-2",
    "action": "scan",
-   "mint": "5LzxH9n4Nb6r3crThMwdjWuC7PFtQL3sXjwkb2Fcpump",
+   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:28:26",
+   "time": "2026-11-02T01:30:35",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "4y1ZVRfY3iUDBtvxj3qvD92uLpemR5DsAHAKf26rRaq6",
+   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
    "result": "skip",
-   "reason": "danger:Large Amount of LP Unlocked"
+   "reason": "thin_pool"
   },
   {
-   "time": "2026-11-02T01:28:26",
+   "time": "2026-11-02T01:30:35",
    "agent": "SCAN-1",
    "action": "scan",
-   "mint": "4y1ZVRfY3iUDBtvxj3qvD92uLpemR5DsAHAKf26rRaq6",
+   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
    "result": "lead",
-   "reason": "gt_trending_5m"
+   "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:23:35",
-   "agent": "SCAN",
-   "action": "scan_summary",
-   "mint": "-",
-   "result": "summary",
-   "reason": "{\"raw\":123,\"queued\":{\"gt_trending_5m\":1,\"graduated\":1,\"dexscreener_new\":1},\"verified\":3,\"fills\":0,\"gt_ok\":4,\"watch\":104,\"watch_added\":17,\"gr"
-  },
-  {
-   "time": "2026-11-02T01:23:35",
+   "time": "2026-11-02T01:30:34",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "FQpyYoUGfAd2vQwhtthdHFyBYizAQHdCVMWeC3bZpump",
+   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:23:35",
-   "agent": "SCAN-3",
+   "time": "2026-11-02T01:30:34",
+   "agent": "SCAN-4",
    "action": "scan",
-   "mint": "FQpyYoUGfAd2vQwhtthdHFyBYizAQHdCVMWeC3bZpump",
+   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:23:34",
+   "time": "2026-11-02T01:30:33",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "E2hxRZwARrAMZEoSnFq1hNRCR6ys4occ59Ug8YLBpump",
+   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
    "result": "skip",
-   "reason": "danger:Top 10 holders high ownership"
+   "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T01:23:34",
+   "time": "2026-11-02T01:30:33",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:30:33",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:30:33",
    "agent": "SCAN-2",
    "action": "scan",
-   "mint": "E2hxRZwARrAMZEoSnFq1hNRCR6ys4occ59Ug8YLBpump",
+   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
    "result": "lead",
-   "reason": "graduated"
+   "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T01:23:34",
+   "time": "2026-11-02T01:30:32",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "7mWGPMfPyoGV57GyeVK4ZiWkBCoDNeQxAHT8Fd2WduTQ",
+   "mint": "4he9D3iDeB6wHvaVVo5NCSJPeNPjVFeDUcRM9BZhrAYK",
    "result": "skip",
    "reason": "danger:Large Amount of LP Unlocked"
   },
   {
-   "time": "2026-11-02T01:23:34",
+   "time": "2026-11-02T01:30:32",
    "agent": "SCAN-1",
    "action": "scan",
-   "mint": "7mWGPMfPyoGV57GyeVK4ZiWkBCoDNeQxAHT8Fd2WduTQ",
+   "mint": "4he9D3iDeB6wHvaVVo5NCSJPeNPjVFeDUcRM9BZhrAYK",
    "result": "lead",
    "reason": "gt_trending_5m"
   },
   {
-   "time": "2026-11-02T01:18:28",
-   "agent": "SCAN",
-   "action": "scan_summary",
-   "mint": "-",
-   "result": "summary",
-   "reason": "{\"raw\":122,\"queued\":{\"gt_trending_5m\":1,\"aged_liquid\":1,\"graduated\":1},\"verified\":3,\"fills\":0,\"gt_ok\":4,\"watch\":88,\"watch_added\":16,\"graduat"
-  },
-  {
-   "time": "2026-11-02T01:18:28",
+   "time": "2026-11-02T01:30:31",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "5nxBiCxW6WaRa9ZVTXWcYVRaWu8u3gZbuKRwGbF3pump",
+   "mint": "36SMRheN4wzdUoUh7zk4KcFr4DAT2HaxPncZ2QgVcRTz",
    "result": "skip",
-   "reason": "danger:Top 10 holders high ownership"
+   "reason": "danger:Large Amount of LP Unlocked"
   },
   {
-   "time": "2026-11-02T01:18:28",
-   "agent": "SCAN-3",
+   "time": "2026-11-02T01:30:31",
+   "agent": "SCAN-4",
    "action": "scan",
-   "mint": "5nxBiCxW6WaRa9ZVTXWcYVRaWu8u3gZbuKRwGbF3pump",
+   "mint": "36SMRheN4wzdUoUh7zk4KcFr4DAT2HaxPncZ2QgVcRTz",
    "result": "lead",
-   "reason": "graduated"
+   "reason": "gt_trending_5m"
   }
  ],
- "last_task_at": "2026-11-02T01:28:27",
- "generated_at": "2026-11-02 01:28:27 PST"
+ "last_task_at": "2026-11-02T01:30:36",
+ "generated_at": "2026-11-02 01:30:36 PST"
 }
