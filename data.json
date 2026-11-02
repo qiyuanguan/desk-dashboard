@@ -12,148 +12,149 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 172,
-  "scans": 96,
-  "leads": 75,
-  "verified": 75,
+  "total": 197,
+  "scans": 108,
+  "leads": 87,
+  "verified": 87,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
-  "missing_data:liq_usd": 29,
+  "missing_data:liq_usd": 30,
   "x_read": 14,
-  "thin_pool": 11,
-  "missing_data:bonding_curve": 9,
+  "missing_data:bonding_curve": 14,
+  "thin_pool": 13,
+  "danger:Low Liquidity": 5,
   "missing_data:price": 4,
-  "danger:Low Liquidity": 3,
+  "danger:Large Amount of LP Unlocked": 2,
   "top10_heavy": 1,
   "authority_open": 1,
   "non_json_answer": 1,
-  "danger:Large Amount of LP Unlocked": 1,
-  "danger:Creator history of rugged tokens": 1
+  "danger:Creator history of rugged tokens": 1,
+  "danger:Top 10 holders high ownership": 1
  },
  "recent_tasks": [
   {
-   "time": "2026-11-02T00:59:24",
+   "time": "2026-11-02T01:00:53",
    "agent": "SCAN",
    "action": "scan_summary",
    "mint": "-",
    "result": "summary",
-   "reason": "{\"raw\":119,\"queued\":{\"gt_trending_5m\":3,\"gt_trending_1h\":1,\"aged_liquid\":2,\"dexscreener_new\":22},\"verified\":12,\"fills\":0,\"gt_ok\":4,\"watch\":2"
+   "reason": "{\"raw\":120,\"queued\":{\"gt_trending_5m\":2,\"graduated\":1,\"dexscreener_new\":16},\"verified\":12,\"fills\":0,\"gt_ok\":4,\"watch\":37,\"watch_added\":14,\"g"
   },
   {
-   "time": "2026-11-02T00:59:24",
+   "time": "2026-11-02T01:00:53",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T00:59:24",
-   "agent": "SCAN-4",
-   "action": "scan",
-   "mint": "J2F2povtZ5WJxWSmTr8iSgfvPYxUJ7fGAicQSBKEpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T00:59:23",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
+   "mint": "6nuBXMpJxTAsu7AsWQe6k7G1Sd5zttwayAPQWnbxDvWf",
    "result": "skip",
    "reason": "thin_pool"
   },
   {
-   "time": "2026-11-02T00:59:23",
-   "agent": "SCAN-3",
-   "action": "scan",
-   "mint": "E84psoV4rJQYBoyTkzTrh1hzjZJv81VGFRX9gMLHpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T00:59:23",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T00:59:23",
-   "agent": "SCAN-2",
-   "action": "scan",
-   "mint": "66XuiGDsQQmkJB7iXtT2QqSZz6dyiXumGgxJFCtdpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T00:59:22",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "GD52VfoPZdad4hiNPg4UnjtDGsS4WiM3mqS8j1czpump",
-   "result": "skip",
-   "reason": "danger:Creator history of rugged tokens"
-  },
-  {
-   "time": "2026-11-02T00:59:22",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "GD52VfoPZdad4hiNPg4UnjtDGsS4WiM3mqS8j1czpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T00:59:21",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T00:59:21",
+   "time": "2026-11-02T01:00:53",
    "agent": "SCAN-4",
    "action": "scan",
-   "mint": "7LQHFp2Yc4WehRsBLWT2yX2trjBo6oS92s81SzyPpump",
+   "mint": "6nuBXMpJxTAsu7AsWQe6k7G1Sd5zttwayAPQWnbxDvWf",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T00:59:21",
+   "time": "2026-11-02T01:00:52",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "mint": "H2x9x3wkUFDMvAXJrsXWwSxeYLCw369n1mjpuEgcpump",
+   "result": "skip",
+   "reason": "danger:Low Liquidity"
+  },
+  {
+   "time": "2026-11-02T01:00:52",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "H2x9x3wkUFDMvAXJrsXWwSxeYLCw369n1mjpuEgcpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:00:51",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
    "result": "skip",
    "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T00:59:21",
-   "agent": "SCAN-3",
+   "time": "2026-11-02T01:00:51",
+   "agent": "SCAN-2",
    "action": "scan",
-   "mint": "6qDVUWJTSijYp1C5FBgeab9ythZQoyFbNmwdJAbupump",
+   "mint": "6JQbDqP5fd3Lmq9fTW52xkKG5fcKwR1aKDJf4ZXUpump",
    "result": "lead",
    "reason": "dexscreener_new"
   },
   {
-   "time": "2026-11-02T00:59:20",
+   "time": "2026-11-02T01:00:47",
    "agent": "VERIFY",
    "action": "verify",
-   "mint": "6g16UK4wHoFhC7PCmw8LYYCdt9q8m99fyoAwxeCrpump",
+   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
    "result": "skip",
-   "reason": "x_read: 同一小时内一批账号用几乎相同的喊单文案和钓鱼投票链接刷热度，最早帖子也是买来的喊单而非真实社区。"
+   "reason": "missing_data:bonding_curve"
   },
   {
-   "time": "2026-11-02T00:59:20",
+   "time": "2026-11-02T01:00:47",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "8gDUSkQDDzAZnMTofFsdKYXCx7fy5T2KvTiCEZK5pump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:00:46",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:00:46",
+   "agent": "SCAN-4",
+   "action": "scan",
+   "mint": "GKnBvYrMDYZcw9sBAbTRZW4B4VCJVqVeKsXMcvy8pump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:00:46",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:00:46",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "BbtvdRYnvHLeAsVg6ErBEYXYRg2329RXkAtFfcCTpump",
+   "result": "lead",
+   "reason": "dexscreener_new"
+  },
+  {
+   "time": "2026-11-02T01:00:45",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
+   "result": "skip",
+   "reason": "thin_pool"
+  },
+  {
+   "time": "2026-11-02T01:00:45",
    "agent": "SCAN-2",
    "action": "scan",
-   "mint": "6g16UK4wHoFhC7PCmw8LYYCdt9q8m99fyoAwxeCrpump",
+   "mint": "gg1zQUgUoXd8hVmkTmLooyzC1QBT1cvJDnCXHLPpump",
    "result": "lead",
-   "reason": "aged_liquid"
+   "reason": "dexscreener_new"
   }
  ],
- "last_task_at": "2026-11-02T00:59:24",
- "generated_at": "2026-11-02 00:59:25 PST"
+ "last_task_at": "2026-11-02T01:00:53",
+ "generated_at": "2026-11-02 01:00:53 PST"
 }
