@@ -12,28 +12,84 @@
  "trades": [],
  "trade_count": 0,
  "tasks": {
-  "total": 223,
-  "scans": 120,
-  "leads": 99,
-  "verified": 99,
+  "total": 230,
+  "scans": 123,
+  "leads": 102,
+  "verified": 102,
   "approved": 0,
   "no_leads": 21
  },
  "skip_reasons": {
   "missing_data:liq_usd": 30,
-  "missing_data:bonding_curve": 19,
-  "x_read": 16,
+  "missing_data:bonding_curve": 20,
+  "x_read": 17,
   "thin_pool": 14,
   "danger:Low Liquidity": 7,
   "missing_data:price": 4,
   "danger:Large Amount of LP Unlocked": 4,
+  "danger:Top 10 holders high ownership": 2,
   "top10_heavy": 1,
   "authority_open": 1,
   "non_json_answer": 1,
-  "danger:Creator history of rugged tokens": 1,
-  "danger:Top 10 holders high ownership": 1
+  "danger:Creator history of rugged tokens": 1
  },
  "recent_tasks": [
+  {
+   "time": "2026-11-02T01:18:28",
+   "agent": "SCAN",
+   "action": "scan_summary",
+   "mint": "-",
+   "result": "summary",
+   "reason": "{\"raw\":122,\"queued\":{\"gt_trending_5m\":1,\"aged_liquid\":1,\"graduated\":1},\"verified\":3,\"fills\":0,\"gt_ok\":4,\"watch\":88,\"watch_added\":16,\"graduat"
+  },
+  {
+   "time": "2026-11-02T01:18:28",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "5nxBiCxW6WaRa9ZVTXWcYVRaWu8u3gZbuKRwGbF3pump",
+   "result": "skip",
+   "reason": "danger:Top 10 holders high ownership"
+  },
+  {
+   "time": "2026-11-02T01:18:28",
+   "agent": "SCAN-3",
+   "action": "scan",
+   "mint": "5nxBiCxW6WaRa9ZVTXWcYVRaWu8u3gZbuKRwGbF3pump",
+   "result": "lead",
+   "reason": "graduated"
+  },
+  {
+   "time": "2026-11-02T01:18:27",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "zttJSZyD67hzNrJ1RKKUsZ1Hya4vfxYRjdQABvppump",
+   "result": "skip",
+   "reason": "x_read: 该合约在X上只有付费DEX触发的扫描机器人帖，没有真实社区，且同题材已有另一合约的WWIII。"
+  },
+  {
+   "time": "2026-11-02T01:18:27",
+   "agent": "SCAN-2",
+   "action": "scan",
+   "mint": "zttJSZyD67hzNrJ1RKKUsZ1Hya4vfxYRjdQABvppump",
+   "result": "lead",
+   "reason": "aged_liquid"
+  },
+  {
+   "time": "2026-11-02T01:17:50",
+   "agent": "VERIFY",
+   "action": "verify",
+   "mint": "9R4e2SFi5zHDSdWhDXsKHsjAQdV3NiBV8V3Kf2Jspump",
+   "result": "skip",
+   "reason": "missing_data:bonding_curve"
+  },
+  {
+   "time": "2026-11-02T01:17:50",
+   "agent": "SCAN-1",
+   "action": "scan",
+   "mint": "9R4e2SFi5zHDSdWhDXsKHsjAQdV3NiBV8V3Kf2Jspump",
+   "result": "lead",
+   "reason": "gt_trending_5m"
+  },
   {
    "time": "2026-11-02T01:14:45",
    "agent": "SCAN",
@@ -97,64 +153,8 @@
    "mint": "DmXnBHtMv98vvJQTYyVs8Kwy9AfT7G6KvjizktJEFxmr",
    "result": "lead",
    "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:09:17",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "G6KTcxD7nJT4poBZsGiANHZHcUvPoDLjaVVZhBPdpump",
-   "result": "skip",
-   "reason": "thin_pool"
-  },
-  {
-   "time": "2026-11-02T01:09:17",
-   "agent": "SCAN-1",
-   "action": "scan",
-   "mint": "G6KTcxD7nJT4poBZsGiANHZHcUvPoDLjaVVZhBPdpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:09:16",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "7FRnPLiMZkhLrPLCGmDbgd8w82gcWL9hDKvjM2NLpump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
-  },
-  {
-   "time": "2026-11-02T01:09:16",
-   "agent": "SCAN-4",
-   "action": "scan",
-   "mint": "7FRnPLiMZkhLrPLCGmDbgd8w82gcWL9hDKvjM2NLpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:09:15",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "DkpL2e59QKGdrHnNHUDmy9ieWbmMHeHfMh4kA6bEpump",
-   "result": "skip",
-   "reason": "danger:Low Liquidity"
-  },
-  {
-   "time": "2026-11-02T01:09:15",
-   "agent": "SCAN-3",
-   "action": "scan",
-   "mint": "DkpL2e59QKGdrHnNHUDmy9ieWbmMHeHfMh4kA6bEpump",
-   "result": "lead",
-   "reason": "dexscreener_new"
-  },
-  {
-   "time": "2026-11-02T01:09:14",
-   "agent": "VERIFY",
-   "action": "verify",
-   "mint": "B6fSFYV84wjjPN2Rej1fai1tgF9qbVtj4a32Kej9pump",
-   "result": "skip",
-   "reason": "missing_data:bonding_curve"
   }
  ],
- "last_task_at": "2026-11-02T01:14:45",
- "generated_at": "2026-11-02 01:14:45 PST"
+ "last_task_at": "2026-11-02T01:18:28",
+ "generated_at": "2026-11-02 01:18:28 PST"
 }
